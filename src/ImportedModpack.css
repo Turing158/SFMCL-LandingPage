@@ -1,0 +1,581 @@
+/* Original SFMCL-ps-astra declarations, scoped to the imported section. */
+.astra-modpack .modpack-copy > h2:first-child { margin-top: 0; }
+.astra-modpack { all: revert; display: block; font-size: 16px; line-height: normal; }
+.astra-modpack :not(svg, svg *) { all: revert; box-sizing: border-box; }
+.astra-modpack ::before, .astra-modpack ::after { box-sizing: border-box; }
+.astra-modpack {
+  font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #263b31;
+  background: #f7f8f3;
+  font-synthesis: none;
+  --bg: #f7f8f3;
+  --surface: #fff;
+  --ink: #263b31;
+  --muted: #69766c;
+  --line: #dce2d7;
+  --soft: #edf0e7;
+  --green: #386449;
+  --green-hover: #274f37;
+  --accent: #c4d4a7;
+  --dark: #1d3228;
+  --nav-bg: rgba(247, 248, 243, 0.94);
+  color-scheme: light;
+}
+:root[data-theme="dark"] .astra-modpack {
+  --bg: #17231d;
+  --surface: #213028;
+  --ink: #e6ebdd;
+  --muted: #b0bcae;
+  --line: #3a4b3d;
+  --soft: #26372c;
+  --green: #b4ce9c;
+  --green-hover: #cce0b8;
+  --accent: #456039;
+  --dark: #12241a;
+  --nav-bg: rgba(23, 35, 29, 0.95);
+  color-scheme: dark;
+}
+.astra-modpack * {
+  box-sizing: border-box;
+}
+.astra-modpack {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+}
+.astra-modpack img {
+  display: block;
+  max-width: 100%;
+}
+.astra-modpack svg {
+  flex-shrink: 0;
+}
+.astra-modpack h1,
+.astra-modpack h2,
+.astra-modpack h3,
+.astra-modpack h4,
+.astra-modpack p {
+  margin: 0;
+}
+.astra-modpack .container {
+  width: min(1200px, calc(100% - 112px));
+  margin-inline: auto;
+}
+.astra-modpack .section {
+  padding-block: 112px;
+}
+.astra-modpack .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  color: var(--muted);
+}
+.astra-modpack .eyebrow > span:first-child:not(.status-dot) {
+  font-size: 11px;
+  color: var(--green);
+  border: 1px solid var(--line);
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  letter-spacing: 0;
+}
+.astra-modpack .modpack-copy h2 {
+  font-size: 39px;
+  line-height: 1.4;
+  letter-spacing: -1.5px;
+  font-weight: 650;
+}
+.astra-modpack .modpack-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 85px;
+  align-items: center;
+  padding-block: 120px;
+}
+.astra-modpack .modpack-art {
+  height: 430px;
+  position: relative;
+  isolation: isolate;
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(transparent, #000 13%, #000 90%, transparent);
+}
+.astra-modpack .package-orbit {
+  position: absolute;
+  width: 295px;
+  height: 295px;
+  background: var(--line);
+  mask: var(--px-circle-ring) center / 100% 100% no-repeat;
+  border-radius: 0;
+  top: 58px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.astra-modpack .orbit-b {
+  width: 415px;
+  height: 415px;
+  top: -2px;
+  opacity: 0.65;
+}
+.astra-modpack .package-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-6deg);
+  width: 160px;
+  height: 160px;
+  border: 1px solid transparent;
+  background: var(--soft);
+  box-shadow: 7px 10px 0 var(--line);
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
+  color: var(--green);
+  clip-path: var(--pxc);
+  --pxs: 4px;
+  border-image: var(--px-frame-line) 6 / calc(2 * var(--pxs)) stretch;
+}
+.astra-modpack .package-center > span {
+  font-size: 8px;
+  font-family: Consolas, monospace;
+  letter-spacing: 0.8px;
+}
+.astra-modpack .package-center > img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.astra-modpack .floating-file {
+  position: absolute;
+  width: 95px;
+  height: 90px;
+  background: var(--surface);
+  border: 1px solid transparent;
+  box-shadow: 0 8px 20px #243b2b05;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 0;
+  z-index: 1;
+  clip-path: var(--pxc);
+  --pxs: 3px;
+  border-image: var(--px-frame-line) 6 / calc(2 * var(--pxs)) stretch;
+}
+.astra-modpack .floating-file svg {
+  color: var(--green);
+  stroke-width: 1.4;
+  width: 27px;
+  height: 27px;
+}
+.astra-modpack .floating-file > span {
+  font-family: Consolas, "Microsoft YaHei", monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+.astra-modpack .file-a {
+  left: 30px;
+  top: 52px;
+  transform: rotate(-10deg);
+}
+.astra-modpack .file-b {
+  right: 23px;
+  top: 75px;
+  transform: rotate(12deg);
+}
+.astra-modpack .file-c {
+  bottom: 40px;
+  left: 48px;
+  transform: rotate(7deg);
+}
+.astra-modpack .import-ready {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  position: absolute;
+  bottom: 59px;
+  right: 5px;
+  font-size: 10px;
+  background: var(--surface);
+  border: 1px solid transparent;
+  padding: 12px 15px;
+  color: var(--green);
+  border-radius: 0;
+  transform: rotate(-4deg);
+  clip-path: var(--pxc);
+  --pxs: 2px;
+  border-image: var(--px-frame-line) 6 / calc(2 * var(--pxs)) stretch;
+}
+.astra-modpack .art-cross {
+  position: absolute;
+  font-family: monospace;
+  color: var(--muted);
+  font-size: 19px;
+}
+.astra-modpack .cross-one {
+  top: 35px;
+  left: 53%;
+}
+.astra-modpack .cross-two {
+  bottom: 25px;
+  right: 90px;
+}
+.astra-modpack .modpack-copy h2 {
+  margin-top: 21px;
+}
+.astra-modpack .modpack-copy > p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-top: 20px;
+}
+.astra-modpack .import-steps {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+}
+.astra-modpack .import-steps > li {
+  display: flex;
+  gap: 13px;
+  position: relative;
+  align-items: flex-start;
+}
+.astra-modpack .import-steps > li > span {
+  font-size: 10px;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  background: var(--soft);
+  color: var(--green);
+  font-family: Consolas, monospace;
+  border: 1px solid var(--line);
+}
+.astra-modpack .import-steps > li:not(:last-child):after {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: 12px;
+  height: 22px;
+  border-left: 1px dashed var(--line);
+}
+.astra-modpack .import-steps strong {
+  font-weight: 500;
+  font-size: 12px;
+  display: block;
+}
+.astra-modpack .import-steps small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+.astra-modpack .format-tags {
+  display: flex;
+  gap: 7px;
+  margin-top: 27px;
+  flex-wrap: wrap;
+}
+.astra-modpack .format-tags > span {
+  font-family: Consolas, monospace;
+  font-size: 9px;
+  border: 1px solid transparent;
+  padding: 5px 9px;
+  color: var(--muted);
+  border-radius: 0;
+  clip-path: var(--pxc);
+  --pxs: 2px;
+  border-image: var(--px-frame-line) 6 / calc(2 * var(--pxs)) stretch;
+}
+@media (max-width: 1199px) {
+  .astra-modpack .container {
+    width: calc(100% - 72px);
+  }
+  .astra-modpack .modpack-copy h2 {
+    font-size: 35px;
+  }
+  .astra-modpack .modpack-section {
+    gap: 55px;
+  }
+  .astra-modpack .modpack-art {
+    height: 410px;
+  }
+  .astra-modpack .file-a {
+    left: 5px;
+  }
+  .astra-modpack .file-b {
+    right: 5px;
+  }
+  .astra-modpack .import-ready {
+    right: -5px;
+    font-size: 9px;
+  }
+}
+@media (max-width: 950px) {
+  .astra-modpack .section {
+    padding-block: 80px;
+  }
+  .astra-modpack .modpack-copy h2 {
+    font-size: 32px;
+  }
+  .astra-modpack .modpack-section {
+    gap: 35px;
+  }
+  .astra-modpack .modpack-copy > p {
+    font-size: 12px;
+  }
+  .astra-modpack .modpack-art {
+    height: 380px;
+  }
+  .astra-modpack .package-center {
+    width: 130px;
+    height: 130px;
+  }
+  .astra-modpack .package-center > img {
+    width: 72px;
+    height: 72px;
+  }
+  .astra-modpack .package-center > span {
+    font-size: 7px;
+  }
+  .astra-modpack .package-orbit {
+    width: 235px;
+    height: 235px;
+    top: 65px;
+  }
+  .astra-modpack .orbit-b {
+    width: 335px;
+    height: 335px;
+    top: 15px;
+  }
+  .astra-modpack .floating-file {
+    width: 73px;
+    height: 76px;
+  }
+  .astra-modpack .file-a {
+    top: 40px;
+    left: 0;
+  }
+  .astra-modpack .file-b {
+    top: 76px;
+    right: 0;
+  }
+  .astra-modpack .file-c {
+    left: 10px;
+    bottom: 30px;
+  }
+  .astra-modpack .import-ready {
+    font-size: 8px;
+    padding: 10px;
+    bottom: 44px;
+  }
+}
+@media (max-width: 700px) {
+  .astra-modpack .container {
+    width: calc(100% - 40px);
+  }
+  .astra-modpack .section {
+    padding-block: 65px;
+  }
+  .astra-modpack .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    gap: 9px;
+  }
+  .astra-modpack .eyebrow > span:first-child:not(.status-dot) {
+    width: 21px;
+    height: 21px;
+    font-size: 10px;
+  }
+  .astra-modpack .modpack-copy h2 {
+    font-size: 32px;
+    line-height: 1.4;
+  }
+  .astra-modpack .modpack-section {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 35px;
+    align-items: stretch;
+  }
+  .astra-modpack .modpack-copy h2 {
+    margin-top: 17px;
+  }
+  .astra-modpack .modpack-copy > p {
+    font-size: 13px;
+    line-height: 1.95;
+  }
+  .astra-modpack .import-steps {
+    gap: 23px;
+  }
+  .astra-modpack .import-steps strong {
+    font-size: 13px;
+  }
+  .astra-modpack .import-steps small {
+    font-size: 11px;
+  }
+  .astra-modpack .import-steps > li:not(:last-child):after {
+    height: 26px;
+  }
+  .astra-modpack .format-tags {
+    margin-top: 23px;
+  }
+  .astra-modpack .modpack-art {
+    height: 340px;
+    max-width: 420px;
+    width: 100%;
+    align-self: center;
+    margin-top: 0;
+  }
+  .astra-modpack .package-center {
+    width: 146px;
+    height: 146px;
+  }
+  .astra-modpack .package-center > img {
+    width: 82px;
+    height: 82px;
+  }
+  .astra-modpack .package-center > span {
+    font-size: 8px;
+  }
+  .astra-modpack .package-orbit {
+    width: 245px;
+    height: 245px;
+    top: 39px;
+  }
+  .astra-modpack .orbit-b {
+    width: 335px;
+    height: 335px;
+    top: -7px;
+  }
+  .astra-modpack .floating-file {
+    width: 80px;
+    height: 80px;
+  }
+  .astra-modpack .file-a {
+    top: 22px;
+    left: 6px;
+  }
+  .astra-modpack .file-b {
+    top: 45px;
+    right: 6px;
+  }
+  .astra-modpack .file-c {
+    left: 17px;
+    bottom: 20px;
+  }
+  .astra-modpack .import-ready {
+    bottom: 33px;
+    right: 0;
+    font-size: 9px;
+  }
+  .astra-modpack .cross-one {
+    top: 9px;
+  }
+  .astra-modpack .cross-two {
+    bottom: 9px;
+  }
+}
+@media (max-width: 370px) {
+  .astra-modpack .container {
+    width: calc(100% - 32px);
+  }
+}
+@media (max-width: 700px) {
+  .astra-modpack .modpack-copy > p {
+    font-size: 16px;
+    line-height: 1.85;
+  }
+  .astra-modpack .import-steps small {
+    font-size: 13px;
+  }
+  .astra-modpack .import-steps strong {
+    font-size: 15px;
+  }
+}
+.astra-modpack {
+  --pxs: 3px;
+  --pxc-circle: polygon(
+    68.75% 0%, 68.75% 6.25%, 81.25% 6.25%, 81.25% 12.5%, 87.5% 12.5%, 87.5% 18.75%, 93.75% 18.75%, 93.75% 31.25%, 100% 31.25%, 100% 68.75%, 93.75% 68.75%, 93.75% 81.25%, 87.5% 81.25%, 87.5% 87.5%, 81.25% 87.5%, 81.25% 93.75%, 68.75% 93.75%, 68.75% 100%, 31.25% 100%, 31.25% 93.75%, 18.75% 93.75%, 18.75% 87.5%, 12.5% 87.5%, 12.5% 81.25%, 6.25% 81.25%, 6.25% 68.75%, 0% 68.75%, 0% 31.25%, 6.25% 31.25%, 6.25% 18.75%, 12.5% 18.75%, 12.5% 12.5%, 18.75% 12.5%, 18.75% 6.25%, 31.25% 6.25%, 31.25% 0%
+  );
+  --px-frame-line: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'18'%20height%3D'18'%20viewBox%3D'0%200%2018%2018'%3E%3Cg%20fill%3D'%23dce2d7'%3E%3Crect%20x%3D'3'%20y%3D'3'%20width%3D'3'%20height%3D'3'%2F%3E%3Crect%20x%3D'12'%20y%3D'3'%20width%3D'3'%20height%3D'3'%2F%3E%3Crect%20x%3D'3'%20y%3D'12'%20width%3D'3'%20height%3D'3'%2F%3E%3Crect%20x%3D'12'%20y%3D'12'%20width%3D'3'%20height%3D'3'%2F%3E%3Crect%20x%3D'6'%20y%3D'0'%20width%3D'6'%20height%3D'3'%2F%3E%3Crect%20x%3D'6'%20y%3D'15'%20width%3D'6'%20height%3D'3'%2F%3E%3Crect%20x%3D'0'%20y%3D'6'%20width%3D'3'%20height%3D'6'%2F%3E%3Crect%20x%3D'15'%20y%3D'6'%20width%3D'3'%20height%3D'6'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+:root[data-theme="dark"] .astra-modpack {
+  --px-frame-line: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'18'%20height%3D'18'%20viewBox%3D'0%200%2018%2018'%3E%3Cg%20fill%3D'%233a4b3d'%3E%3Crect%20x%3D'3'%20y%3D'3'%20width%3D'3'%20height%3D'3'%2F%3E%3Crect%20x%3D'12'%20y%3D'3'%20width%3D'3'%20height%3D'3'%2F%3E%3Crect%20x%3D'3'%20y%3D'12'%20width%3D'3'%20height%3D'3'%2F%3E%3Crect%20x%3D'12'%20y%3D'12'%20width%3D'3'%20height%3D'3'%2F%3E%3Crect%20x%3D'6'%20y%3D'0'%20width%3D'6'%20height%3D'3'%2F%3E%3Crect%20x%3D'6'%20y%3D'15'%20width%3D'6'%20height%3D'3'%2F%3E%3Crect%20x%3D'0'%20y%3D'6'%20width%3D'3'%20height%3D'6'%2F%3E%3Crect%20x%3D'15'%20y%3D'6'%20width%3D'3'%20height%3D'6'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+.astra-modpack *,
+.astra-modpack ::before,
+.astra-modpack ::after {
+  --pxc: polygon(
+    calc(2 * var(--pxs)) 0, calc(100% - 2 * var(--pxs)) 0,
+    calc(100% - 2 * var(--pxs)) var(--pxs),
+    calc(100% - var(--pxs)) var(--pxs),
+    calc(100% - var(--pxs)) calc(2 * var(--pxs)),
+    100% calc(2 * var(--pxs)),
+    100% calc(100% - 2 * var(--pxs)),
+    calc(100% - var(--pxs)) calc(100% - 2 * var(--pxs)),
+    calc(100% - var(--pxs)) calc(100% - var(--pxs)),
+    calc(100% - 2 * var(--pxs)) calc(100% - var(--pxs)),
+    calc(100% - 2 * var(--pxs)) 100%,
+    calc(2 * var(--pxs)) 100%,
+    calc(2 * var(--pxs)) calc(100% - var(--pxs)),
+    var(--pxs) calc(100% - var(--pxs)),
+    var(--pxs) calc(100% - 2 * var(--pxs)),
+    0 calc(100% - 2 * var(--pxs)),
+    0 calc(2 * var(--pxs)),
+    var(--pxs) calc(2 * var(--pxs)),
+    var(--pxs) var(--pxs),
+    calc(2 * var(--pxs)) var(--pxs)
+  );
+}
+.astra-modpack {
+  --px-circle-ring: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20viewBox%3D%22-0.5%20-0.5%2017%2017%22%20preserveAspectRatio%3D%22none%22%3E%3Cpolygon%20points%3D%2211%2C0%2011%2C1%2013%2C1%2013%2C2%2014%2C2%2014%2C3%2015%2C3%2015%2C5%2016%2C5%2016%2C11%2015%2C11%2015%2C13%2014%2C13%2014%2C14%2013%2C14%2013%2C15%2011%2C15%2011%2C16%205%2C16%205%2C15%203%2C15%203%2C14%202%2C14%202%2C13%201%2C13%201%2C11%200%2C11%200%2C5%201%2C5%201%2C3%202%2C3%202%2C2%203%2C2%203%2C1%205%2C1%205%2C0%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E");
+}
+.astra-modpack {
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-spring: cubic-bezier(.22, 1.35, .45, 1);
+}
+@keyframes float-up {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+@keyframes soft-pulse {
+  0%, 100% { opacity: .5; }
+  50% { opacity: 1; }
+}
+@keyframes orbit-breathe {
+  0%, 100% { scale: 1; rotate: 0deg; }
+  50% { scale: 1.06; rotate: 6deg; }
+}
+
+.astra-modpack {
+  transition: background-color 360ms ease, color 280ms ease, border-color 280ms ease;
+}
+.astra-modpack .floating-file { animation: float-up 5.5s ease-in-out infinite; }
+.astra-modpack .file-b { animation-delay: -2s; animation-duration: 6.5s; }
+.astra-modpack .file-c { animation-delay: -4s; animation-duration: 7s; }
+.astra-modpack .package-center { animation: float-up 7s -2s ease-in-out infinite; }
+.astra-modpack .package-orbit { animation: orbit-breathe 16s ease-in-out infinite; }
+.astra-modpack .orbit-b { animation-direction: reverse; animation-delay: -8s; }
+.astra-modpack .import-ready { animation: float-up 6s -3s ease-in-out infinite; }
+.astra-modpack .art-cross { animation: soft-pulse 4s ease-in-out infinite; }
+.astra-modpack .cross-two { animation-delay: -2s; }
+.astra-modpack .import-steps > li > span {
+  transition: scale 300ms var(--ease-spring), rotate 350ms var(--ease-spring);
+}
+.astra-modpack .import-steps > li:hover > span { scale: 1.12; rotate: -5deg; }

@@ -1,0 +1,18 @@
+{
+  "source": "https://zh.minecraft.wiki/",
+  "files": [
+    {
+      "file": "chest.gif",
+      "title": "File:Chest JE2 BE3.gif",
+      "source": "https://zh.minecraft.wiki/w/File:Chest_JE2_BE3.gif",
+      "downloadUrl": "https://zh.minecraft.wiki/images/Chest_JE2_BE3.gif?4e19c",
+      "originalUrl": "https://zh.minecraft.wiki/images/Chest_JE2_BE3.gif?4e19c",
+      "width": 300,
+      "height": 300,
+      "bytes": 219480,
+      "sha256": "771b73dc077475e71c63ec75580aa2db1bfe35cb54c2ddb2b54e2fb16d146516",
+      "license": "License Mojang",
+      "description": "== 摘要 ==\n[[箱子]]的动态渲染图。非动画版本见[[:File:Chest.png]]。\n\n== 许可协议 ==\n{{License Mojang}}\n\n[[Category:方块动作动画]]"
+    }
+  ]
+}

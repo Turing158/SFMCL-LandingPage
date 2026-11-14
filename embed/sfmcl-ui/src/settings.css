@@ -1,0 +1,234 @@
+/* Inputs and labeled selects share one compact size inside the settings cards.
+   The cards are shared by the settings page and per-version game settings. */
+.settings-section :is(input.pixel-input, .pixel-select-trigger) {
+  min-height: 38px;
+  padding: 7px 10px;
+  font-size: 12px;
+}
+.settings-section textarea.pixel-input {
+  padding: 7px 10px;
+}
+
+/* Tighter vertical rhythm so each card reads as one compact block. */
+.settings-stack {
+  gap: 14px;
+}
+.settings-section {
+  padding: 18px;
+}
+.settings-section > p {
+  margin-bottom: 14px;
+}
+.settings-section .field {
+  gap: 6px;
+  margin: 12px 0;
+}
+.settings-section .field:first-of-type {
+  margin-top: 12px;
+}
+.settings-section .form-grid {
+  gap: 0 18px;
+}
+.settings-section .form-grid > .field {
+  margin-top: 12px;
+}
+.settings-section .download-options-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.window-size-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) max-content;
+  gap: 0 18px;
+  align-items: start;
+}
+.window-size-row > .field {
+  min-width: 0;
+}
+.window-fullscreen .pixel-switch {
+  align-self: flex-start;
+  height: 38px;
+}
+.launch-behavior-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 18px;
+  align-items: start;
+}
+.launch-behavior-groups > .field {
+  min-width: 0;
+}
+.launcher-behavior-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0 18px;
+  align-items: start;
+}
+.launcher-behavior-row > .field {
+  min-width: 0;
+}
+.launcher-restore .pixel-switch {
+  align-self: flex-end;
+  height: 38px;
+}
+.settings-section .setting-row {
+  gap: 18px;
+  padding: 13px 0;
+}
+.settings-section .setting-row-compact {
+  padding: 0;
+}
+.settings-section .theme-options {
+  margin-top: 14px;
+  gap: 10px;
+}
+@media (max-width: 650px) {
+  .settings-section {
+    padding: 14px;
+  }
+  .window-size-row,
+  .launcher-behavior-row {
+    column-gap: 12px;
+  }
+  .launch-behavior-groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .settings-section .download-options-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .download-options-grid > .download-task-display {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tabs keep their shared indicator; switches animate their own track. */
+.settings-page button:not([role="tab"], .pixel-switch) {
+  transition:
+    var(--surface-depth-transition),
+    transform 180ms cubic-bezier(0.22, 0.8, 0.25, 1),
+    scale 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease,
+    filter 180ms ease,
+    --pixel-field-border 180ms ease;
+}
+.settings-page
+  button:not([role="tab"], .pixel-switch):is(:hover, :focus-visible):not(
+    :disabled
+  ) {
+  transform: translateY(-2px);
+}
+.settings-page button:not([role="tab"], .pixel-switch):active:not(:disabled) {
+  transform: translateY(2px);
+  scale: 0.98;
+  transition-duration: 90ms;
+}
+.settings-page button:disabled {
+  transform: none;
+  scale: 1;
+}
+.settings-page button > svg:not(.spin, .pixel-icon) {
+  transition: transform 180ms ease;
+}
+.settings-page
+  button:is(:hover, :focus-visible):not(:disabled)
+  > svg:not(.spin, .pixel-icon) {
+  transform: rotate(-8deg) scale(1.1);
+}
+.settings-page button:active:not(:disabled) > svg:not(.spin, .pixel-icon) {
+  transform: scale(0.94);
+}
+.settings-page
+  :is(.surface-frame, .surface-frame::before, .surface-frame::after) {
+  transition: background-color 180ms ease;
+}
+.settings-page .theme-option:is(:hover, :focus-visible) {
+  --surface-edge: var(--accent);
+  --surface-fill: color-mix(in srgb, var(--panel), var(--soft) 68%);
+}
+.settings-page .theme-preview {
+  transition: transform 180ms cubic-bezier(0.22, 0.8, 0.25, 1);
+}
+.settings-page .theme-option:is(:hover, :focus-visible) .theme-preview {
+  transform: translateY(-1px);
+}
+.settings-page .theme-option:active .theme-preview {
+  transform: scale(0.98);
+}
+
+.update-check-button {
+  min-width: 138px;
+}
+.update-check[data-update-state="latest"] .update-check-button {
+  --surface-edge: var(--surface-success);
+  --surface-fill: var(--surface-success-bg);
+  color: var(--surface-success);
+  opacity: 1;
+}
+.update-check[data-update-state="unpublished"] .update-check-button {
+  color: var(--muted);
+}
+
+.local-data-directory-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content 38px;
+  gap: 8px;
+}
+.local-data-directory-actions > .pixel-input {
+  min-width: 0;
+  color: var(--muted);
+}
+.local-data-directory-actions > .button,
+.local-data-directory-actions > .icon-button {
+  min-height: 38px;
+}
+.local-data-directory-actions > .local-data-open {
+  width: 38px;
+  height: 38px;
+}
+.local-data-backup-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.local-data-settings .local-data-progress {
+  margin: 12px 0 0;
+  color: var(--accent);
+}
+.local-data-result {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--accent);
+}
+.local-data-result[data-success="false"] {
+  color: var(--danger);
+}
+.local-data-result .path-text {
+  margin: 7px 0 0;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+}
+.local-data-recovery {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.local-data-recovery > .path-text {
+  flex: 1;
+  min-width: 0;
+}
+@media (max-width: 650px) {
+  .local-data-directory-actions {
+    grid-template-columns: minmax(0, 1fr) 38px;
+  }
+  .local-data-directory-actions > .pixel-input {
+    grid-column: 1 / -1;
+  }
+  .local-data-directory-actions > .button {
+    justify-self: start;
+  }
+  .local-data-directory-actions > .local-data-open {
+    justify-self: end;
+  }
+}

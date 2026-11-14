@@ -1,0 +1,728 @@
+:root {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  z-index: 50;
+  pointer-events: none;
+  background: var(--green);
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left;
+}
+
+/* Reveal content without transforming ancestors of the fixed launcher dialog. */
+[data-reveal="pending"] {
+  opacity: 0;
+}
+[data-reveal="shown"] {
+  animation: content-enter 620ms var(--motion-ease) var(--reveal-delay, 0ms)
+    both;
+}
+@keyframes content-enter {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+.nav-bar {
+  animation: nav-enter 600ms var(--motion-ease) both;
+}
+@keyframes nav-enter {
+  from {
+    opacity: 0;
+    translate: 0 -12px;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+.hero-copy > * {
+  animation: content-enter 720ms var(--motion-ease) both;
+}
+.hero-copy > :nth-child(1) {
+  animation-delay: 60ms;
+}
+.hero-copy > :nth-child(2) {
+  animation-delay: 140ms;
+}
+.hero-copy > :nth-child(3) {
+  animation-delay: 230ms;
+}
+.hero-copy > :nth-child(4) {
+  animation-delay: 320ms;
+}
+.hero-copy > :nth-child(5) {
+  animation-delay: 400ms;
+}
+.hero-copy > :nth-child(6) {
+  animation-delay: 460ms;
+}
+.hero-title-accent path {
+  stroke-dasharray: 460;
+  animation: underline-draw 1000ms var(--motion-ease) 550ms both;
+}
+@keyframes underline-draw {
+  from {
+    stroke-dashoffset: 460;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.preview-kicker,
+.preview-caption {
+  animation: content-enter 700ms var(--motion-ease) 280ms both;
+}
+.launcher-preview-panel:not(.is-expanded) .launcher-preview {
+  animation: preview-enter 800ms var(--motion-ease) 220ms both;
+}
+@keyframes preview-enter {
+  from {
+    opacity: 0;
+    translate: 0 22px;
+    scale: 0.98;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+    scale: none;
+  }
+}
+.preview-note {
+  animation:
+    content-enter 700ms var(--motion-ease) 500ms both,
+    note-float 5s ease-in-out 1200ms infinite;
+}
+@keyframes note-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.hero-bottom {
+  animation: content-enter 700ms var(--motion-ease) 650ms both;
+}
+.hero-haze {
+  animation: haze-drift 12s ease-in-out infinite;
+}
+@keyframes haze-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-25px, 12px) scale(1.04);
+  }
+}
+.hero-cross {
+  animation: pixel-drift 6s steps(8, end) infinite;
+}
+.cross-two {
+  animation-delay: -3s;
+}
+@keyframes pixel-drift {
+  0%,
+  100% {
+    translate: none;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 6px -12px;
+    rotate: 12deg;
+  }
+}
+.hero-particles {
+  position: absolute;
+  inset: 95px 0 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-particles span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--green);
+  animation: particle-float 8s linear infinite;
+}
+.hero-particles span:nth-child(1) {
+  left: 5%;
+  top: 35%;
+  animation-delay: -2s;
+}
+.hero-particles span:nth-child(2) {
+  left: 27%;
+  top: 78%;
+  animation-delay: -5s;
+}
+.hero-particles span:nth-child(3) {
+  left: 42%;
+  top: 12%;
+  animation-delay: -7s;
+}
+.hero-particles span:nth-child(4) {
+  left: 58%;
+  top: 62%;
+  animation-delay: -4s;
+}
+.hero-particles span:nth-child(5) {
+  left: 72%;
+  top: 8%;
+  animation-delay: -1s;
+}
+.hero-particles span:nth-child(6) {
+  left: 84%;
+  top: 87%;
+  animation-delay: -6s;
+}
+.hero-particles span:nth-child(7) {
+  left: 93%;
+  top: 30%;
+  animation-delay: -3s;
+}
+.hero-particles span:nth-child(8) {
+  left: 16%;
+  top: 58%;
+  animation-delay: -4.5s;
+}
+@keyframes particle-float {
+  0% {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  25%,
+  60% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 0;
+    translate: 16px -65px;
+  }
+}
+.status-dot {
+  animation: status-breathe 2.8s ease-in-out infinite;
+}
+@keyframes status-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+.scroll-icon svg {
+  animation: scroll-nudge 1.8s ease-in-out infinite;
+}
+@keyframes scroll-nudge {
+  0%,
+  70%,
+  100% {
+    translate: 0 0;
+  }
+  35% {
+    translate: 0 4px;
+  }
+}
+.hero .hero-haze,
+.hero .hero-cross,
+.hero .hero-particles span,
+.hero .scroll-icon svg,
+.hero .status-dot,
+.hero .preview-note {
+  animation-play-state: paused;
+}
+.hero[data-in-view="true"] .hero-haze,
+.hero[data-in-view="true"] .hero-cross,
+.hero[data-in-view="true"] .hero-particles span,
+.hero[data-in-view="true"] .scroll-icon svg,
+.hero[data-in-view="true"] .status-dot,
+.hero[data-in-view="true"] .preview-note {
+  animation-play-state: running;
+}
+
+/* Hover and press effects keep the pixel frames and hit areas stable. */
+.button,
+.icon-button,
+.launcher-preview-expand,
+.palette-swatch,
+.resource-selector > button,
+.architecture-control button {
+  transition:
+    transform 220ms var(--motion-ease),
+    background 220ms,
+    color 220ms,
+    box-shadow 220ms;
+}
+.button:hover,
+.launcher-preview-expand:hover {
+  transform: translateY(-2px);
+}
+.button:active,
+.icon-button:active,
+.launcher-preview-expand:active {
+  transform: translateY(1px) scale(0.98);
+}
+.button > svg:last-child {
+  transition: transform 220ms var(--motion-ease);
+}
+.button:hover > svg:last-child {
+  transform: translateX(3px);
+}
+.icon-button:hover {
+  transform: translateY(-2px);
+}
+.nav-actions .icon-button:first-child svg {
+  animation: icon-enter 350ms var(--motion-ease) both;
+}
+@keyframes icon-enter {
+  from {
+    opacity: 0;
+    rotate: -45deg;
+    scale: 0.7;
+  }
+  to {
+    opacity: 1;
+    rotate: 0deg;
+    scale: 1;
+  }
+}
+.mobile-navigation {
+  opacity: 0;
+  transform: translateY(-24px) scale(0.94);
+  transform-origin: top right;
+  transition:
+    opacity 320ms ease,
+    transform 420ms var(--motion-ease),
+    visibility 0s linear 420ms;
+}
+.mobile-navigation[data-open="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 320ms ease,
+    transform 420ms var(--motion-ease),
+    visibility 0s;
+}
+.mobile-navigation a {
+  opacity: 0;
+  transform: translateY(-14px);
+  --menu-delay: 0ms;
+  transition:
+    background 200ms,
+    translate 200ms,
+    opacity 240ms ease var(--menu-delay),
+    transform 320ms var(--motion-ease) var(--menu-delay);
+}
+.mobile-navigation a:nth-child(1) { --menu-delay: 120ms; }
+.mobile-navigation a:nth-child(2) { --menu-delay: 90ms; }
+.mobile-navigation a:nth-child(3) { --menu-delay: 60ms; }
+.mobile-navigation a:nth-child(4) { --menu-delay: 30ms; }
+.mobile-navigation[data-open="true"] a {
+  opacity: 1;
+  transform: translateY(0);
+}
+.mobile-navigation[data-open="true"] a:nth-child(1) { --menu-delay: 40ms; }
+.mobile-navigation[data-open="true"] a:nth-child(2) { --menu-delay: 80ms; }
+.mobile-navigation[data-open="true"] a:nth-child(3) { --menu-delay: 120ms; }
+.mobile-navigation[data-open="true"] a:nth-child(4) { --menu-delay: 160ms; }
+.mobile-navigation[data-open="true"] a:nth-child(5) { --menu-delay: 200ms; }
+.mobile-menu-button > svg {
+  animation: icon-enter 350ms var(--motion-ease) both;
+}
+.mobile-navigation a:hover {
+  translate: 3px 0;
+}
+.desktop-links a {
+  position: relative;
+}
+.desktop-links a::before {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms var(--motion-ease);
+}
+.desktop-links a:hover::before {
+  transform: scaleX(1);
+}
+.feature-card,
+.resource-card,
+.download-option,
+.release-entry-content {
+  transition:
+    transform 280ms var(--motion-ease),
+    box-shadow 280ms;
+}
+.feature-card:hover,
+.resource-card:hover,
+.download-option:hover {
+  transform: translateY(-5px);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--green) 15%, transparent);
+}
+.resource-card:hover {
+  box-shadow: inset 0 0 0 2px #8fae7c55;
+}
+.release-entry-content:hover {
+  transform: translateX(3px);
+}
+.card-label > svg,
+.package-icon > svg,
+.step-top > :is(svg, .minecraft-icon) {
+  transition: transform 300ms var(--motion-ease);
+}
+.feature-card:hover .card-label > svg,
+.download-option:hover .package-icon > svg {
+  transform: rotate(-8deg) scale(1.1);
+}
+.avatar-stage img {
+  transition: transform 450ms var(--motion-ease);
+}
+.character-feature:hover .avatar-stage img {
+  transform: translateY(-8px) rotate(-2deg);
+}
+.stage-shadow {
+  transition: scale 450ms var(--motion-ease);
+}
+.character-feature:hover .stage-shadow {
+  scale: 0.9 1;
+}
+.world-folders > div {
+  transition: transform 300ms var(--motion-ease);
+}
+.world-folders > div:nth-child(2) {
+  transition-delay: 70ms;
+}
+.version-feature:hover .world-folders > div {
+  transform: translateX(5px);
+}
+.illustration-progress > span {
+  animation: download-flow 2s linear infinite;
+  animation-play-state: paused;
+}
+.download-feature[data-in-view="true"] .illustration-progress > span {
+  animation-play-state: running;
+}
+@keyframes download-flow {
+  to {
+    background-position: 40px 0;
+  }
+}
+.palette-swatch:hover {
+  transform: translateY(-3px);
+}
+.palette-swatch[aria-pressed="true"] svg,
+.resource-selector .selected > svg {
+  animation: selection-pop 350ms var(--motion-ease) both;
+}
+@keyframes selection-pop {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  65% {
+    opacity: 1;
+    scale: 1.15;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.palette-swatch:active,
+.resource-selector > button:active,
+.architecture-control button:active {
+  transform: translateY(1px);
+}
+.loader-marquee, .loader-rope-track {
+  animation: loader-belt-scroll 32s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+.loader-ribbon[data-in-view="true"] .loader-marquee,
+.loader-ribbon[data-in-view="true"] .loader-rope-track,
+.deck-slide[data-visible="true"] :is(.loader-marquee, .loader-rope-track) {
+  animation-play-state: running;
+}
+.loader-card-face {
+  animation: loader-card-sway 4.8s ease-in-out infinite;
+  animation-play-state: paused;
+  transform: rotate(0deg);
+  transition: transform 450ms cubic-bezier(0.22, 1.4, 0.36, 1);
+}
+.loader-ribbon[data-in-view="true"] .loader-card-face,
+.deck-slide[data-visible="true"] .loader-card-face {
+  animation-play-state: running;
+}
+@media (hover: hover) {
+  .loader-ribbon:has(.loader-card:hover) :is(.loader-marquee, .loader-rope-track) {
+    animation-play-state: paused;
+  }
+  .loader-ribbon .loader-card:hover .loader-card-face {
+    animation-play-state: paused;
+    transform: rotate(-5deg);
+  }
+}
+@keyframes loader-card-sway {
+  0%,
+  100% {
+    rotate: -1.2deg;
+  }
+  50% {
+    rotate: 1.2deg;
+  }
+}
+@keyframes loader-belt-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Remount only changing content, leaving controls and their focus intact. */
+.download-file,
+.resource-description > h3,
+.resource-description > p {
+  animation: content-swap 420ms var(--motion-ease) both;
+}
+.resource-description > p {
+  animation-delay: 70ms;
+}
+.palette-stack {
+  animation: content-swap 350ms var(--motion-ease) both;
+}
+.palette-sheet-back {
+  animation: palette-float 5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.palette-chip {
+  animation: palette-float 4s ease-in-out -1s infinite;
+  animation-play-state: paused;
+}
+.appearance-feature[data-in-view="true"] :is(.palette-sheet-back, .palette-chip) {
+  animation-play-state: running;
+}
+@keyframes content-swap {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+@keyframes palette-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+.resource-art .scene {
+  transition: transform 450ms var(--motion-ease);
+}
+.resource-card:hover .scene {
+  transform: translateY(-4px) scale(1.025);
+}
+.scene-block {
+  animation: block-float 4.5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.scene-block:nth-of-type(2) {
+  animation-delay: -1.5s;
+}
+.scene-block:nth-of-type(3) {
+  animation-delay: -3s;
+}
+@keyframes block-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+.scene-sparks {
+  animation: status-breathe 3s steps(5, end) infinite;
+  animation-play-state: paused;
+}
+.landscape-image {
+  animation: landscape-drift 12s ease-in-out infinite;
+  animation-play-state: paused;
+}
+@keyframes landscape-drift {
+  0%,
+  100% {
+    transform: scale(1.06) translateX(-1%);
+  }
+  50% {
+    transform: scale(1.1) translateX(1%);
+  }
+}
+.resource-card[data-in-view="true"]
+  :is(.scene-block, .scene-sparks, .landscape-image),
+.cta-section[data-in-view="true"] .landscape-image {
+  animation-play-state: running;
+}
+.step-top > :is(svg, .minecraft-icon) {
+  animation: step-icon 4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.step[data-in-view="true"] .step-top > :is(svg, .minecraft-icon) {
+  animation-play-state: running;
+}
+.step:nth-child(2) .step-top > :is(svg, .minecraft-icon) {
+  animation-delay: -1.3s;
+}
+.step:nth-child(3) .step-top > :is(svg, .minecraft-icon) {
+  animation-delay: -2.6s;
+}
+@keyframes step-icon {
+  0%,
+  70%,
+  100% {
+    translate: 0 0;
+  }
+  35% {
+    translate: 0 -4px;
+  }
+}
+.step:hover .step-top > :is(svg, .minecraft-icon) {
+  transform: rotate(-6deg);
+}
+.step::after {
+  transform-origin: left;
+}
+.step[data-reveal="shown"]::after {
+  animation: connector-draw 700ms var(--motion-ease) 300ms both;
+}
+@keyframes connector-draw {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+.faq-list summary {
+  transition:
+    color 220ms,
+    background 220ms;
+}
+.faq-list summary:hover {
+  color: var(--green);
+  background: color-mix(in srgb, var(--green) 4%, transparent);
+}
+.faq-list details[open] > p {
+  animation: content-swap 350ms var(--motion-ease) both;
+}
+@supports (interpolate-size: allow-keywords) {
+  .faq-list details {
+    interpolate-size: allow-keywords;
+  }
+  .faq-list details::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size 350ms var(--motion-ease),
+      content-visibility 350ms allow-discrete;
+  }
+  .faq-list details[open]::details-content {
+    block-size: auto;
+  }
+}
+.cta-pixel-word {
+  animation: cta-float 5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.cta-section[data-in-view="true"] .cta-pixel-word {
+  animation-play-state: running;
+}
+@keyframes cta-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -10px;
+  }
+}
+.cta-art:hover .cta-pixel-word {
+  animation-duration: 2.5s;
+}
+
+.is-expanded .launcher-preview-window {
+  animation: dialog-enter 320ms var(--motion-ease) both;
+}
+.is-expanded .launcher-preview-backdrop {
+  animation: backdrop-enter 250ms ease both;
+}
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.is-expanded.is-closing .launcher-preview-window {
+  animation: dialog-exit 180ms ease-in both;
+}
+.is-expanded.is-closing .launcher-preview-backdrop {
+  animation: backdrop-enter 180ms ease-in reverse both;
+}
+@keyframes dialog-exit {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+@media (max-width: 639px) {
+  .step::after {
+    transform-origin: top;
+  }
+  .step[data-reveal="shown"]::after {
+    animation-name: connector-vertical;
+  }
+  @keyframes connector-vertical {
+    from {
+      scale: 1 0;
+    }
+    to {
+      scale: 1 1;
+    }
+  }
+}

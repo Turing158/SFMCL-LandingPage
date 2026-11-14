@@ -1,0 +1,60 @@
+/* Move the live preview as one surface during chapter transitions. Pausing
+   preserves animation progress and the original application instance. */
+:root[data-preview-paused="true"] *,
+:root[data-preview-paused="true"] *::before,
+:root[data-preview-paused="true"] *::after {
+  animation-play-state: paused !important;
+}
+
+/* Draw one rounded canvas behind the page. The desktop corner masks and
+   inset-shadow overlay leave seams when rasterized inside a scaled iframe.
+   Keep the canvas anchored to the footer so navigation only moves content. */
+.preview-app-surface .workspace {
+  isolation: isolate;
+  background: var(--sidebar);
+}
+
+.preview-app-surface .workspace-footer-region {
+  z-index: auto;
+  will-change: auto;
+}
+
+.preview-app-surface .workspace-footer-region::before {
+  z-index: 0;
+  box-shadow: none;
+  background-color: var(--bg);
+  background-image: var(--app-background-image, none);
+  background-size: cover;
+  background-position: center;
+}
+
+.preview-app-surface .page {
+  z-index: 1;
+  border-radius: var(--workspace-corner-radius) 0 0 var(--workspace-corner-radius);
+}
+
+.preview-app-surface .workspace-footer-clip {
+  z-index: 30;
+}
+
+.preview-app-surface .workspace::before,
+.preview-app-surface .workspace-footer-region::after {
+  content: none;
+}
+
+/* Blur the frame's own content before the website scales it. A native
+   ::backdrop filter can sample misplaced layers in a transformed iframe.
+   Native dialogs/popovers stay sharp in the top layer above this surface. */
+.preview-app-surface {
+  transition: filter 180ms ease;
+}
+
+:root:has(.modal[open]:not([data-closing="true"])) .preview-app-surface {
+  filter: blur(3px);
+  transition-duration: 220ms;
+}
+
+.modal::backdrop {
+  backdrop-filter: none;
+  background: rgb(0 0 0 / 10%);
+}

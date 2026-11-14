@@ -1,0 +1,176 @@
+{
+  "sourceSite": "https://zh.minecraft.wiki/",
+  "copyright": "Minecraft 游戏截图及游戏素材的著作权属于 Mojang Studios。请查看各文件说明页的授权信息；这些图片不属于展示站的 MIT 代码许可。",
+  "assets": [
+    {
+      "file": "grass-block.png",
+      "title": "File:Grass Block JE7 BE6.png",
+      "source": "https://zh.minecraft.wiki/w/File:Grass_Block_JE7_BE6.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Grass_Block_JE7_BE6.png?d27c1",
+      "originalSize": {
+        "width": 300,
+        "height": 300
+      },
+      "size": {
+        "width": 300,
+        "height": 300
+      },
+      "bytes": 12212,
+      "sha256": "c262718404f5639e1efe27312d0ef15e83cfebab6cae7073ad0397d81d47cb0d",
+      "processing": "无损 PNG；未改变画面内容。"
+    },
+    {
+      "file": "diamond-block.png",
+      "title": "File:Block of Diamond JE5 BE3.png",
+      "source": "https://zh.minecraft.wiki/w/File:Block_of_Diamond_JE5_BE3.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Block_of_Diamond_JE5_BE3.png?5b4dc",
+      "originalSize": {
+        "width": 300,
+        "height": 300
+      },
+      "size": {
+        "width": 300,
+        "height": 300
+      },
+      "bytes": 8206,
+      "sha256": "f63d4d1343f659c334604cb194ec8ca9d853045e7979a409f64fa2af8eef85ca",
+      "processing": "无损 PNG；未改变画面内容。"
+    },
+    {
+      "file": "stone.png",
+      "title": "File:Stone JE5 BE3.png",
+      "source": "https://zh.minecraft.wiki/w/File:Stone_JE5_BE3.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Stone_JE5_BE3.png?33434",
+      "originalSize": {
+        "width": 300,
+        "height": 300
+      },
+      "size": {
+        "width": 300,
+        "height": 300
+      },
+      "bytes": 7710,
+      "sha256": "217b4d24abc11713d0912eb26ada7f51a419579ce9d5b9f5d8ba5efc4782acce",
+      "processing": "无损 PNG；未改变画面内容。"
+    },
+    {
+      "file": "diamond-pickaxe.png",
+      "title": "File:Diamond Pickaxe JE3 BE3.png",
+      "source": "https://zh.minecraft.wiki/w/File:Diamond_Pickaxe_JE3_BE3.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Diamond_Pickaxe_JE3_BE3.png?40f8b",
+      "originalSize": {
+        "width": 160,
+        "height": 160
+      },
+      "size": {
+        "width": 160,
+        "height": 160
+      },
+      "bytes": 610,
+      "sha256": "14a3d9d98b6c96d14897db8b467dd4f024016620906929eede1c5d131eddcb0b",
+      "processing": "无损 PNG；未改变画面内容。"
+    },
+    {
+      "file": "steve-head.png",
+      "title": "File:Player Head (S) JE2.png",
+      "source": "https://zh.minecraft.wiki/w/File:Player_Head_(S)_JE2.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Player_Head_%28S%29_JE2.png?22b8c",
+      "originalSize": {
+        "width": 300,
+        "height": 300
+      },
+      "size": {
+        "width": 134,
+        "height": 148
+      },
+      "bytes": 2686,
+      "sha256": "db28bfa700da19ed87abd27c2fa5e4d776fb328cf095dbf6f3e2a78b2bcd106e",
+      "processing": "仅裁去透明留白；无损 PNG，未改变画面内容。"
+    },
+    {
+      "file": "diamond-sword.png",
+      "title": "File:Diamond Sword JE3 BE3.png",
+      "source": "https://zh.minecraft.wiki/w/File:Diamond_Sword_JE3_BE3.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Diamond_Sword_JE3_BE3.png?7b46e",
+      "originalSize": {
+        "width": 160,
+        "height": 160
+      },
+      "size": {
+        "width": 160,
+        "height": 160
+      },
+      "bytes": 293,
+      "sha256": "c0809d0d1742ead275377c1517d34ba441648cc04f31efc051a3bfae47cd82d1",
+      "processing": "无损 PNG；未改变画面内容。"
+    },
+    {
+      "file": "oak.png",
+      "title": "File:Oak.png",
+      "source": "https://zh.minecraft.wiki/w/File:Oak.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Oak.png?9b342",
+      "originalSize": {
+        "width": 802,
+        "height": 808
+      },
+      "size": {
+        "width": 802,
+        "height": 808
+      },
+      "bytes": 178533,
+      "sha256": "d64bad08327057c77f2e4361d954020e486855db8013a963a48d17ef34773415",
+      "processing": "无损 PNG；未改变画面内容。"
+    },
+    {
+      "file": "forest.webp",
+      "title": "File:Forest.png",
+      "source": "https://zh.minecraft.wiki/w/File:Forest.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Forest.png?c970f",
+      "originalSize": {
+        "width": 1920,
+        "height": 1080
+      },
+      "size": {
+        "width": 960,
+        "height": 540
+      },
+      "bytes": 103668,
+      "sha256": "75c866be465c0f58edd2e5bdfa14c60fe490515e32f30672576d83bb0a2e9d30",
+      "processing": "等比缩小并转为 WebP；未改变画面内容。"
+    },
+    {
+      "file": "plains.webp",
+      "title": "File:Plains.png",
+      "source": "https://zh.minecraft.wiki/w/File:Plains.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Plains.png?88f49",
+      "originalSize": {
+        "width": 3840,
+        "height": 2160
+      },
+      "size": {
+        "width": 1200,
+        "height": 675
+      },
+      "bytes": 107222,
+      "sha256": "310c924b3b599878fcab0a6247a7cf650300a6e9b8e682ec9cf981c53cf6d702",
+      "processing": "等比缩小并转为 WebP；未改变画面内容。"
+    },
+    {
+      "file": "sunrise.webp",
+      "title": "File:Sunrise.png",
+      "source": "https://zh.minecraft.wiki/w/File:Sunrise.png",
+      "originalUrl": "https://zh.minecraft.wiki/images/Sunrise.png?7b755",
+      "originalSize": {
+        "width": 800,
+        "height": 424
+      },
+      "size": {
+        "width": 800,
+        "height": 424
+      },
+      "bytes": 25494,
+      "sha256": "10684cdeac0b0c4a12d9f31d492cc6872d5a6072184373c7791d05d5b533ccf1",
+      "processing": "等比缩小并转为 WebP；未改变画面内容。"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+/* Pixel contours and 18 × 18 nine-slice frames from Turing158.github.io.
+   Frame colors use the existing SFMCL showcase palette. This stylesheet
+   is loaded only by the showcase; the launcher iframe remains isolated. */
+:root {
+  --pxs: 3px;
+  --px-frame: url("../public/assets/site-ui/lineLight.svg");
+  --px-frame-accent: url("../public/assets/site-ui/accentLight.svg");
+  --px-frame-preview: url("../public/assets/site-ui/previewLight.svg");
+  --px-frame-resource: url("../public/assets/site-ui/resource.svg");
+  --px-frame-resource-tag: url("../public/assets/site-ui/resourceTag.svg");
+  --pxc-circle-in: polygon(
+    71.4286% 0%,
+    71.4286% 7.1429%,
+    85.7143% 7.1429%,
+    85.7143% 14.2857%,
+    92.8571% 14.2857%,
+    92.8571% 28.5714%,
+    100% 28.5714%,
+    100% 71.4286%,
+    92.8571% 71.4286%,
+    92.8571% 85.7143%,
+    85.7143% 85.7143%,
+    85.7143% 92.8571%,
+    71.4286% 92.8571%,
+    71.4286% 100%,
+    28.5714% 100%,
+    28.5714% 92.8571%,
+    14.2857% 92.8571%,
+    14.2857% 85.7143%,
+    7.1429% 85.7143%,
+    7.1429% 71.4286%,
+    0% 71.4286%,
+    0% 28.5714%,
+    7.1429% 28.5714%,
+    7.1429% 14.2857%,
+    14.2857% 14.2857%,
+    14.2857% 7.1429%,
+    28.5714% 7.1429%,
+    28.5714% 0%
+  );
+  --pxc-circle: polygon(
+    68.75% 0%,
+    68.75% 6.25%,
+    81.25% 6.25%,
+    81.25% 12.5%,
+    87.5% 12.5%,
+    87.5% 18.75%,
+    93.75% 18.75%,
+    93.75% 31.25%,
+    100% 31.25%,
+    100% 68.75%,
+    93.75% 68.75%,
+    93.75% 81.25%,
+    87.5% 81.25%,
+    87.5% 87.5%,
+    81.25% 87.5%,
+    81.25% 93.75%,
+    68.75% 93.75%,
+    68.75% 100%,
+    31.25% 100%,
+    31.25% 93.75%,
+    18.75% 93.75%,
+    18.75% 87.5%,
+    12.5% 87.5%,
+    12.5% 81.25%,
+    6.25% 81.25%,
+    6.25% 68.75%,
+    0% 68.75%,
+    0% 31.25%,
+    6.25% 31.25%,
+    6.25% 18.75%,
+    12.5% 18.75%,
+    12.5% 12.5%,
+    18.75% 12.5%,
+    18.75% 6.25%,
+    31.25% 6.25%,
+    31.25% 0%
+  );
+}
+:root[data-theme="dark"] {
+  --px-frame: url("../public/assets/site-ui/lineDark.svg");
+  --px-frame-accent: url("../public/assets/site-ui/accentDark.svg");
+  --px-frame-preview: url("../public/assets/site-ui/previewDark.svg");
+}
+/* Resolve each contour on its own element so local --pxs overrides work. */
+*,
+::before,
+::after {
+  --pxc: polygon(
+    calc(2 * var(--pxs)) 0,
+    calc(100% - 2 * var(--pxs)) 0,
+    calc(100% - 2 * var(--pxs)) var(--pxs),
+    calc(100% - var(--pxs)) var(--pxs),
+    calc(100% - var(--pxs)) calc(2 * var(--pxs)),
+    100% calc(2 * var(--pxs)),
+    100% calc(100% - 2 * var(--pxs)),
+    calc(100% - var(--pxs)) calc(100% - 2 * var(--pxs)),
+    calc(100% - var(--pxs)) calc(100% - var(--pxs)),
+    calc(100% - 2 * var(--pxs)) calc(100% - var(--pxs)),
+    calc(100% - 2 * var(--pxs)) 100%,
+    calc(2 * var(--pxs)) 100%,
+    calc(2 * var(--pxs)) calc(100% - var(--pxs)),
+    var(--pxs) calc(100% - var(--pxs)),
+    var(--pxs) calc(100% - 2 * var(--pxs)),
+    0 calc(100% - 2 * var(--pxs)),
+    0 calc(2 * var(--pxs)),
+    var(--pxs) calc(2 * var(--pxs)),
+    var(--pxs) var(--pxs),
+    calc(2 * var(--pxs)) var(--pxs)
+  );
+}

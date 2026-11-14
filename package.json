@@ -1,0 +1,33 @@
+{
+  "name": "sfmcl-ps",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b",
+    "sync:launcher": "node scripts/sync-launcher.mjs",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.12.4",
+    "@tauri-apps/plugin-dialog": "^2.8.4",
+    "@tauri-apps/plugin-opener": "^2.7.2",
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.9.1",
+    "remark-gfm": "^4.0.1",
+    "skinview3d": "^3.4.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.156.0",
+    "@vitejs/plugin-react": "^4.5.0",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.5"
+  }
+}
