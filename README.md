@@ -1,6 +1,5 @@
 # SFMCL-T 项目展示站
 
-参考同级 `CodeCraft-ps` 的导航、项目介绍与下载入口结构，围绕 SFMCL-T 的实际功能重新设计。技术栈为 React、TypeScript、Vite 和 Lucide。
 
 ## 开发与构建
 
