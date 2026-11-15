@@ -24,6 +24,7 @@ import { confirmAction, pick, external } from "../api";
 import { Badge, Button, Skin, PixelFrame } from "../components";
 import { PageTitle } from "../PageHeader";
 import { usePlayerLogin } from "../usePlayerLogin";
+import { useLittleSkinLogin } from "../useLittleSkinLogin";
 import { usePlayerLoginTransition } from "../usePlayerLoginTransition";
 import type { Player } from "../types";
 import { playerAccountLabel } from "../playerAccountLabel";
@@ -40,7 +41,11 @@ import type {
 import type { PlayerLoginKind } from "../navigation";
 import { PlayerProfileDialog } from "./PlayerProfileDialog";
 import { PlayerYggdrasilLogin } from "./PlayerYggdrasilLogin";
-import { yggdrasilServerLabel } from "../yggdrasilDrop";
+import { isLittleSkinServer, yggdrasilServerLabel } from "../yggdrasilDrop";
+import {
+  littleSkinProviders,
+  PlayerLittleSkinLogin,
+} from "./PlayerLittleSkinLogin";
 import {
   thirdPartyOAuthEnabled,
   thirdPartyOAuthMenuLabel,
@@ -183,11 +188,20 @@ export function Players() {
       : "第三方登录";
   const importedName = imported ? yggdrasilServerLabel(imported.server) : "";
   const auth = usePlayerLogin(loginKind === "microsoft");
+  const littleSkinActive =
+    thirdPartyOAuthEnabled &&
+    (loginKind === "yggdrasil-oauth" ||
+      !!(imported && isLittleSkinServer(imported.server)));
+  const littleSkinAuth = useLittleSkinLogin(
+    littleSkinActive,
+    imported?.id ?? loginKind ?? "",
+  );
+  const browserAuth = littleSkinActive ? littleSkinAuth : auth;
   const { root, animateView } = usePlayerViewTransition();
   const loginState = usePlayerLoginTransition(
     root,
-    loginKind === "microsoft",
-    auth,
+    loginKind === "microsoft" || littleSkinActive,
+    browserAuth,
   );
   const [view, setView] = useState<PlayerView>(() => {
     try {
@@ -318,6 +332,9 @@ export function Players() {
       data-view={view}
       data-login={loginKind}
       data-login-state={loginState || undefined}
+      data-browser-auth={
+        loginKind === "microsoft" || littleSkinActive || undefined
+      }
     >
       <header className="players-heading">
         <PageTitle
@@ -402,7 +419,12 @@ export function Players() {
         <section className="player-preview has-surface" aria-label="角色预览">
           <PixelFrame />
           <div className="players-stage">
-            {loginKind === "microsoft" ? (
+            {littleSkinActive ? (
+              <PlayerAuthStage
+                auth={littleSkinAuth}
+                stages={littleSkinProviders}
+              />
+            ) : loginKind === "microsoft" ? (
               <PlayerAuthStage auth={auth} />
             ) : thirdPartyLogin ? (
               <div className="players-yggdrasil-stage">
@@ -513,7 +535,12 @@ export function Players() {
             )}
           </div>
           <div className="players-identity">
-            {loginKind === "microsoft" ? (
+            {littleSkinActive ? (
+              <PlayerAuthIdentity
+                auth={littleSkinAuth}
+                stages={littleSkinProviders}
+              />
+            ) : loginKind === "microsoft" ? (
               <PlayerAuthIdentity auth={auth} />
             ) : thirdPartyLogin ? (
               <div className="players-identity-top">
@@ -736,6 +763,11 @@ export function Players() {
             />
           ) : loginKind === "microsoft" ? (
             <PlayerMicrosoftLogin auth={auth} />
+          ) : littleSkinActive ? (
+            <PlayerLittleSkinLogin
+              auth={littleSkinAuth}
+              importedServer={imported?.server}
+            />
           ) : thirdPartyLogin ? (
             <PlayerYggdrasilLogin
               key={imported?.id ?? loginKind}

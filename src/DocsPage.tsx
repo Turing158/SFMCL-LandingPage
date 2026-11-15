@@ -112,22 +112,24 @@ export default function DocsPage() {
       <div className="container docs-grid">
         <div className="docs-sidebar-slot">
           <aside className="docs-sidebar">
-            <span className="eyebrow">
-              <BookOpen size={14} /> 使用文档
-            </span>
-            <nav aria-label="文档目录">
-              {docSections.map(({ id, title }, index) => (
-                <Link
-                  key={id}
-                  to={`/docs/${id}`}
-                  aria-current={requestedIndex === index ? "page" : undefined}
-                >
-                  <span className="mono">0{index + 1}</span>
-                  {title}
-                  <ChevronRight size={13} />
-                </Link>
-              ))}
-            </nav>
+            <div className="docs-sidebar-scroll">
+              <span className="eyebrow">
+                <BookOpen size={14} /> 使用文档
+              </span>
+              <nav aria-label="文档目录">
+                {docSections.map(({ id, title }, index) => (
+                  <Link
+                    key={id}
+                    to={`/docs/${id}`}
+                    aria-current={requestedIndex === index ? "page" : undefined}
+                  >
+                    <span className="mono">{String(index + 1).padStart(2, "0")}</span>
+                    {title}
+                    <ChevronRight size={13} />
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </aside>
         </div>
         <article className="docs-article" aria-busy={phase !== "idle"}>
@@ -149,6 +151,8 @@ export default function DocsPage() {
                 remarkPlugins={[remarkGfm]}
                 components={{
                   h1: ({ children }) => <h2 id="docs-current-title">{children}</h2>,
+                  h2: ({ children }) => <h3>{children}</h3>,
+                  h3: ({ children }) => <h4>{children}</h4>,
                   ol: ({ children }) => <ol className="doc-steps">{children}</ol>,
                   table: ({ children }) => (
                     <div className="doc-table-wrap"><table>{children}</table></div>

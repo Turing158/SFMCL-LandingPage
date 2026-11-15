@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b",
     "sync:launcher": "node scripts/sync-launcher.mjs",
+    "prune:launcher": "node scripts/prune-launcher.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {

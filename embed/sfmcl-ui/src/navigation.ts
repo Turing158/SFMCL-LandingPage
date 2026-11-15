@@ -10,6 +10,7 @@ export const pageNames: Record<Page, string> = {
   home: "开始游戏",
   players: "角色管理",
   versions: "版本管理",
+  multiplayer: "联机",
   resources: "资源中心",
   downloads: "下载中心",
   settings: "设置",

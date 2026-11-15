@@ -162,7 +162,7 @@ export default function LauncherPreview({ theme }: { theme: Theme }) {
             {expanded && (
               <div className="launcher-preview-header">
                 <span id="launcher-preview-title">
-                  SFMCL-T · 可交互软件界面
+                  SFMCL-T · 软件界面展示
                 </span>
                 <button
                   ref={closeButton}

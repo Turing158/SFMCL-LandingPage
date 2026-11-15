@@ -8,6 +8,7 @@ import {
 } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { pruneLauncher } from "./prune-launcher.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const sourceArgument = process.argv.indexOf("--source");
@@ -15,6 +16,9 @@ const source = resolve(
   sourceArgument >= 0
     ? process.argv[sourceArgument + 1]
     : "D:/EducationalData/rust/SFMCL-T/SFMCL-T",
+);
+const { version } = JSON.parse(
+  await readFile(join(source, "src-tauri/tauri.conf.json"), "utf8"),
 );
 const manifest = [];
 async function copyTree(from, to, filter = () => true) {
@@ -55,11 +59,12 @@ await copyFile(
 await writeFile(
   join(root, "embed/sfmcl-ui/source-manifest.json"),
   JSON.stringify(
-    { source, files: manifest.sort((a, b) => a.path.localeCompare(b.path)) },
+    { source, version, files: manifest.sort((a, b) => a.path.localeCompare(b.path)) },
     null,
     2,
   ) + "\n",
 );
+const cleanup = await pruneLauncher(root);
 console.log(
-  `已同步 ${manifest.length} 个前端文件，所有原始组件与样式保持逐字节一致。`,
+  `已同步并保留 ${cleanup.retainedCode} 个展示区依赖文件，原始组件与样式保持逐字节一致；清理 ${cleanup.code} 个未引用代码文件与 ${cleanup.assets} 个闲置资源。`,
 );

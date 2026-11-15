@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Compass,
   House,
+  Network,
   Play,
   Settings2,
 } from "lucide-react";
@@ -14,6 +15,7 @@ import { desktop, statusLabel } from "./api";
 import { Skin, useImage, PixelFrame } from "./components";
 import { Players } from "./pages/Players";
 import { Versions } from "./pages/Versions";
+import { Multiplayer } from "./pages/Multiplayer";
 import { Resources } from "./pages/Resources";
 import { Downloads } from "./pages/Downloads";
 import { SettingsPage } from "./pages/Settings";
@@ -40,10 +42,12 @@ import { SidebarProgress, useSidebarProgress } from "./SidebarProgress";
 import { HomeLandscape } from "./HomeLandscape";
 import { useHomeScrollPadding } from "./useHomeScrollPadding";
 import { handleWindowDrag } from "./windowDrag";
+import { useLauncherQuit } from "./useLauncherQuit";
 import "./home.css";
 const navigation = [
   { id: "home", name: pageNames.home, icon: House },
   { id: "versions", name: pageNames.versions, icon: Box },
+  { id: "multiplayer", name: pageNames.multiplayer, icon: Network },
   { id: "resources", name: pageNames.resources, icon: Compass },
   { id: "settings", name: pageNames.settings, icon: Settings2 },
 ] as const;
@@ -51,12 +55,14 @@ const pages = {
   home: Home,
   players: Players,
   versions: Versions,
+  multiplayer: Multiplayer,
   resources: Resources,
   downloads: Downloads,
   settings: SettingsPage,
 };
 export default function App() {
   const app = useApp();
+  useLauncherQuit(app.reportError);
   const { workspace, pageKey } = useNavigationTransition(app.route);
   const [collapsed, setCollapsed] = useState(false);
   const [narrow, setNarrow] = useState(

@@ -30,6 +30,7 @@ export interface GameSettings {
   jvmArgsEnabled: boolean;
   jvmArgs: string;
   gameArgs: string;
+  offlineLan: boolean;
 }
 export interface VersionSettings {
   useGlobal: boolean;
@@ -152,6 +153,14 @@ export interface Job {
   downloadId?: string;
   error?: string;
   log: string[];
+  launch?: {
+    versionId: string;
+    gameVersion: string;
+    directory: string;
+    playerName: string;
+    offlineLan?: boolean;
+    running: boolean;
+  };
 }
 export interface Download {
   id: string;
@@ -267,4 +276,10 @@ export interface Bootstrap {
   version: string;
 }
 export type Page =
-  "home" | "players" | "versions" | "resources" | "downloads" | "settings";
+  | "home"
+  | "players"
+  | "versions"
+  | "multiplayer"
+  | "resources"
+  | "downloads"
+  | "settings";

@@ -556,6 +556,7 @@ function Faq() {
 function Cta() {
   return (
     <section className="cta-section">
+      <span className="cta-backdrop" aria-hidden="true" />
       <div className="container cta-inner">
         <div>
           <h2>

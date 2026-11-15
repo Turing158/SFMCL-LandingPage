@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { heroMotions } from "./heroMotion";
 import { loaderMotions } from "./loaderMotion";
+import { ctaMotions } from "./ctaMotion";
 import "./home-deck.css";
 
 export interface HomeSlide {
@@ -27,6 +28,7 @@ const pieces = [
   ".hero-cross", ".hero-haze", ".hero-particles > span",
   ".resource-source", ".resource-tag", ".art-index", ".footer-bottom > span",
   ".feature-footnote > span", ".resource-footer > span",
+  ".cta-backdrop", ".cta-pixel-word", ".cta-art .landscape",
 ].join(",");
 
 function motionPieces(slide: HTMLElement) {
@@ -127,7 +129,11 @@ export default function HomeDeck({ slides }: { slides: HomeSlide[] }) {
     panel.dataset.motion = "running";
     // Read every resting position before creating effects; alternating reads and
     // animation writes forces repeated style/layout work, especially with iframe content.
-    const motions = new Map([...heroMotions(panel, entering), ...loaderMotions(panel, targets, entering)]);
+    const motions = new Map([
+      ...heroMotions(panel, entering),
+      ...loaderMotions(panel, targets, entering),
+      ...ctaMotions(panel, direction, entering),
+    ]);
     const routes = targets.map((element, order) => motions.get(element)?.frames ??
       pathFrames(element, order, index, direction, entering));
     const travel = targets.map((element, order) => element.animate(

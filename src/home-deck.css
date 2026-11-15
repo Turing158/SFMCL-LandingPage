@@ -150,9 +150,9 @@ html.home-deck-open, .home-deck-open body { overflow: hidden; overscroll-behavio
 .home-deck .faq-list summary h3 { font-size: 16px; }
 .home-deck .faq-list details > p { padding: 4px 0 16px 28px; font-size: 16px; line-height: 1.6; }
 
-.home-deck .cta-section { border: 0; background: transparent; transition: background-color 360ms var(--motion-ease); }
-.home-deck[data-active="download"]:not([data-phase="exit"]) .cta-section { background: #dfe9cf; transition-duration: 650ms; }
-.home-deck .cta-inner { min-height: 0; padding-block: 32px; gap: 36px; }
+.home-deck .cta-section { position: relative; isolation: isolate; border: 0; background: transparent; }
+.home-deck .cta-backdrop { position: absolute; inset: 0; z-index: 0; background: #dfe9cf; pointer-events: none; }
+.home-deck .cta-inner { z-index: 1; min-height: 0; padding-block: 32px; gap: 36px; }
 .home-deck .cta-section h2 { font-size: clamp(30px, 3vw, 42px); margin-top: 0; line-height: 1.35; }
 .home-deck .cta-section p { font-size: 16px; margin-top: 16px; }
 .home-deck .cta-section .button { margin-top: 20px; }

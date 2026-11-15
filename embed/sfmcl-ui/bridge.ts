@@ -1,18 +1,14 @@
 import type {
   Bootstrap,
-  DownloadSpec,
-  Job,
-  LocalDataResult,
-  LocalResource,
-  Player,
   Settings,
   Tasks,
   Version,
   VersionSettings,
-  YggdrasilLogin,
 } from "./src/types";
 import type { HomeContentConfig } from "./src/homeContentConfig";
 import { playerPreviewDefaults } from "./src/playerPreview";
+import type { MultiplayerSnapshot } from "./src/useMultiplayer";
+import { version as launcherVersion } from "./source-manifest.json";
 
 // Only the browser/IPC boundary is adapted. The application components and CSS
 // are the original files, and all demo operations stay in this frame's memory.
@@ -48,7 +44,7 @@ const theme =
     : "light";
 const directory = "C:/Minecraft";
 const data: Bootstrap = {
-  version: "0.1.1",
+  version: launcherVersion,
   dataDir: "C:/SFMCL-T",
   defaultDownloadCacheDir: "C:/SFMCL-T/downloads/cache",
   players: [
@@ -98,6 +94,7 @@ const data: Bootstrap = {
     jvmArgsEnabled: false,
     jvmArgs: "",
     gameArgs: "",
+    offlineLan: false,
     theme,
     accent: "forest",
     backgroundType: "none",
@@ -125,15 +122,21 @@ const versions: Version[] = ["1.21.4", "1.20.1-Fabric"].map((id) => ({
   icon: "",
 }));
 const tasks: Tasks = {
-  jobs: [],
-  downloads: ["Minecraft 1.21.4", "Fabric API"].map((title, i) => ({
+  jobs: [{
+    id: "showcase-install", title: "安装 Minecraft 1.21.4", status: "completed",
+    steps: ["检查环境", "下载游戏", "安装完成"].map((name) => ({
+      name, status: "completed", detail: "成功",
+    })),
+    currentStep: 2, log: ["Minecraft 1.21.4 安装成功"],
+  }],
+  downloads: ["Minecraft 1.21.4", "Fabric API", "Sodium"].map((title, i) => ({
     id: `showcase-download-${i}`,
     title,
-    status: i === 0 ? "running" : "paused",
-    downloaded: 67108864,
+    status: i === 0 ? "running" : i === 1 ? "paused" : "completed",
+    downloaded: i === 2 ? 104857600 : 67108864,
     total: 104857600,
     unknownSize: false,
-    completed: 51,
+    completed: i === 2 ? 80 : 51,
     failed: 0,
     fileCount: 80,
     speed: i === 0 ? 5242880 : 0,
@@ -149,7 +152,7 @@ let homeContent: HomeContentConfig = {
     { id: "builtin:notices", type: "notices", visible: true },
   ],
 };
-let notices: Payload[] = [
+const notices: Payload[] = [
   {
     id: "showcase:welcome",
     preset: false,
@@ -159,12 +162,12 @@ let notices: Payload[] = [
       "**欢迎来到 SFMCL-T。**\n\n选择角色、准备版本，然后开始你的下一次冒险。",
   },
 ];
-let hidden: string[] = [];
+const hidden: string[] = [];
 const versionSettings = new Map<string, VersionSettings>();
 const copy = <T>(value: T): T => structuredClone(value);
-// Demo tasks only change through controls. Reuse the snapshot between polls so
+// Reuse the fixed task snapshot between polls so
 // the launcher does not render its entire tree every 500 ms for identical data.
-let tasksSnapshot: Tasks | undefined;
+const tasksSnapshot = copy(tasks);
 const gameSettings = () => copy(data.settings);
 const javaRuntime = (path: string) => ({
   path,
@@ -174,74 +177,12 @@ const javaRuntime = (path: string) => ({
 });
 const previewSuccess = (message = "操作成功") =>
   window.dispatchEvent(new CustomEvent("sfmcl-preview-success", { detail: message }));
-const previewTimers = new Set<number>();
-const later = (action: () => void, delay: number) => {
-  const id = window.setTimeout(() => {
-    previewTimers.delete(id);
-    action();
-  }, delay);
-  previewTimers.add(id);
-};
-if (import.meta.hot)
-  import.meta.hot.dispose(() => previewTimers.forEach((id) => clearTimeout(id)));
-const downloadFiles = new Map<string, DownloadSpec[]>();
-const loginSessions = new Map<string, YggdrasilLogin>();
-const dataOperations = new Map<string, { kind: LocalDataResult["kind"]; path: string }>();
-const localResources: { versionId: string; item: LocalResource }[] = [];
-const authorizationUrl = new URL("#preview-authorization", location.href).href;
-const addPlayer = (name: string, online = false, yggdrasil?: Player["yggdrasil"]) => {
-  const player: Player = {
-    uuid: crypto.randomUUID(), name, online, skin: "", slim: false,
-    ...(yggdrasil ? { yggdrasil } : {}),
-  };
-  data.players.push(player);
-  data.settings.activePlayer = player.uuid;
-  return copy(player);
-};
-const addJob = (title: string, names = ["操作完成"]): Job => {
-  const job: Job = {
-    id: crypto.randomUUID(), title, status: "completed",
-    steps: names.map((name) => ({ name, status: "completed", detail: "成功" })),
-    currentStep: names.length - 1, log: [`${title}成功`],
-  };
-  tasks.jobs.unshift(job);
-  tasksSnapshot = undefined;
-  return job;
-};
-const addDownload = (title: string, file?: DownloadSpec) => {
-  const id = crypto.randomUUID();
-  const total = file?.size || 1048576;
-  tasks.downloads.unshift({
-    id, title, status: "completed", downloaded: total, total,
-    unknownSize: false, completed: 1, failed: 0, fileCount: 1,
-    speed: 0, workers: 0, steps: [{ name: "下载完成", status: "completed", detail: "成功" }],
-  });
-  if (file) downloadFiles.set(id, [copy(file)]);
-  tasksSnapshot = undefined;
-  return id;
-};
-const installVersion = (payload: Payload) => {
-  const id = String(payload.name || payload.minecraft || "示例整合包");
-  const root = payload.root || data.settings.activeDir;
-  const loader = payload.loader?.kind || "Vanilla";
-  if (!versions.some((version) => version.id === id && version.directory === root))
-    versions.push({
-      id, version: payload.minecraft || "1.21.4", kind: "release", loader,
-      path: `${root}/.minecraft/versions/${id}`, directory: root, javaMajor: 21, icon: "",
-    });
-  addJob(`安装 ${id}`, ["检查文件", "安装游戏", "安装完成"]);
-  addDownload(`Minecraft ${id}`);
-  return id;
-};
-const thirdPartyLogin = (payload: Payload): YggdrasilLogin => {
-  const sessionId = payload.sessionId || crypto.randomUUID();
-  const server = payload.server || "https://littleskin.cn/api/yggdrasil";
-  const login: YggdrasilLogin = {
-    sessionId, server, serverName: server.includes("littleskin") ? "LittleSkin" : "第三方皮肤站",
-    profiles: [{ id: crypto.randomUUID(), name: "Alex" }],
-  };
-  loginSessions.set(sessionId, login);
-  return copy(login);
+const multiplayer: MultiplayerSnapshot = {
+  state: "idle", sessionId: null, role: null,
+  componentReady: true, componentVersion: "2.6.4",
+  tunnelReady: true, tunnelVersion: "2026.10.7", componentJobId: null,
+  name: "", gameVersion: "", address: null, worldOpen: false,
+  members: [], error: null,
 };
 const callbacks = new Map<number, (event: unknown) => void>();
 const listeners = new Map<number, { event: string; handler: number }>();
@@ -269,9 +210,10 @@ async function request(operation: string, payload: Payload) {
     case "bootstrap":
       return copy(data);
     case "tasks":
-      return tasksSnapshot ??= copy(tasks);
+      return tasksSnapshot;
     case "settings.save":
       data.settings = copy(payload as Settings);
+      previewSuccess("设置修改成功");
       return copy(data.settings);
     case "versions.list":
       return copy(
@@ -295,11 +237,6 @@ async function request(operation: string, payload: Payload) {
       data.settings.activeVersion = payload.id;
       if (payload.directory) data.settings.activeDir = payload.directory;
       return;
-    case "versions.favorite": {
-      const version = versions.find((v) => v.id === payload.id);
-      if (version) version.favorite = payload.favorite;
-      return true;
-    }
     case "versions.settings.get":
       return copy(
         versionSettings.get(payload.id) || {
@@ -309,168 +246,30 @@ async function request(operation: string, payload: Payload) {
       );
     case "versions.settings.save":
       versionSettings.set(payload.id, copy(payload.config));
+      previewSuccess("设置修改成功");
       return copy(payload.config);
-    case "versions.rename": {
-      const version = versions.find((v) => v.id === payload.id &&
-        v.directory === (payload.directory || data.settings.activeDir));
-      if (version) {
-        const previousId = version.id;
-        version.id = payload.name;
-        version.path = `${version.directory}/.minecraft/versions/${payload.name}`;
-        if (versionSettings.has(previousId)) {
-          versionSettings.set(version.id, versionSettings.get(previousId)!);
-          versionSettings.delete(previousId);
-        }
-        if (data.settings.activeVersion === previousId) data.settings.activeVersion = version.id;
-      }
-      return true;
-    }
-    case "versions.icon": {
-      const version = versions.find((v) => v.id === payload.id);
-      if (version) version.icon = payload.path ? "/assets/DefaultGameIcon/Minecraft.png" : "";
-      return true;
-    }
-    case "versions.repair":
-      return addJob(`修复 ${payload.id}`, ["检查游戏文件", "修复完成"]).id;
-    case "versions.delete": {
-      const index = versions.findIndex((v) => v.id === payload.id &&
-        v.directory === (payload.directory || data.settings.activeDir));
-      if (index >= 0) versions.splice(index, 1);
-      versionSettings.delete(payload.id);
-      if (data.settings.activeVersion === payload.id)
-        data.settings.activeVersion = versions.find((v) => v.directory === data.settings.activeDir)?.id || "";
-      return true;
-    }
     case "players.list":
       return copy(data.players);
     case "players.select":
       data.settings.activePlayer = payload.id;
       return;
-    case "players.add":
-      return addPlayer(String(payload.name));
-    case "players.reorder":
-      data.players.sort(
-        (a, b) => payload.ids.indexOf(a.uuid) - payload.ids.indexOf(b.uuid),
-      );
-      return copy(data.players);
-    case "players.remove":
-      data.players = data.players.filter((p) => p.uuid !== payload.id);
-      if (data.settings.activePlayer === payload.id)
-        data.settings.activePlayer = data.players[0]?.uuid || "";
-      return;
-    case "players.login": {
-      addPlayer("MinecraftPlayer", true);
-      const job = addJob("Microsoft 登录", [
-        "等待浏览器授权", "验证 Xbox Live", "验证 Minecraft 账号", "保存角色",
-      ]);
-      return { jobId: job.id, userCode: "SUCCESS", verificationUri: authorizationUrl, expiresIn: 900 };
-    }
-    case "players.yggdrasil.login":
-      return thirdPartyLogin(payload);
-    case "players.yggdrasil.oauth.begin": {
-      const login = thirdPartyLogin(payload);
-      return { sessionId: login.sessionId, userCode: "SUCCESS", verificationUri: authorizationUrl, expiresIn: 900 };
-    }
-    case "players.yggdrasil.oauth.wait":
-      return copy(loginSessions.get(payload.sessionId) || thirdPartyLogin(payload));
-    case "players.yggdrasil.select": {
-      const login = loginSessions.get(payload.sessionId);
-      if (login) {
-        const profile = login.profiles.find((p) => p.id === payload.profileId) || login.profiles[0];
-        addPlayer(profile.name, true, {
-          server: login.server, serverName: login.serverName,
-          homepage: new URL(login.server).origin, profileId: profile.id,
-        });
-        loginSessions.delete(payload.sessionId);
-      }
-      return true;
-    }
-    case "players.yggdrasil.cancel":
-      loginSessions.delete(payload.sessionId);
-      return;
-    case "players.refresh":
-      return copy(data.players.find((p) => p.uuid === payload.id));
-    case "players.rename": {
-      const player = data.players.find((p) => p.uuid === payload.id);
-      if (player) player.name = payload.name;
-      return copy(player);
-    }
-    case "players.skin.preview":
-      return "/assets/steve.png";
-    case "players.skin": {
-      const player = data.players.find((p) => p.uuid === payload.id);
-      if (player) {
-        player.skin = payload.path ? "/assets/steve.png" : "";
-        player.slim = !!payload.slim;
-      }
-      return copy(player);
-    }
-    case "players.namechange":
-      return { nameChangeAllowed: true, changedAt: null, createdAt: null };
-    case "players.capes": {
-      const player = data.players.find((p) => p.uuid === payload.id);
-      const capes = [{ id: "showcase-cape", name: "示例披风",
-        url: "/assets/steve.png", active: player?.cape === "/assets/steve.png" }];
-      if (player) player.capes = capes;
-      return copy(capes);
-    }
-    case "players.cape": {
-      const player = data.players.find((p) => p.uuid === payload.id);
-      if (player) {
-        player.cape = payload.capeId ? "/assets/steve.png" : "";
-        player.capes?.forEach((cape) => { cape.active = cape.id === payload.capeId; });
-      }
-      return copy(player);
-    }
-    case "launch": {
-      const job = addJob(`启动 ${payload.id || data.settings.activeVersion}`, ["准备游戏", "游戏运行"]);
-      job.status = "running";
-      job.steps[1].status = "running";
-      previewSuccess("游戏启动成功");
-      later(() => {
-        if (job.status === "running") {
-          job.status = "completed";
-          job.steps[1].status = "completed";
-          tasksSnapshot = undefined;
-        }
-      }, 3000);
-      return job.id;
-    }
-    case "jobs.cancel": {
-      const job = tasks.jobs.find((j) => j.id === payload.id);
-      if (job && job.status !== "completed") {
-        job.status = "cancelled";
-        job.steps.forEach((step) => { if (step.status === "running") step.status = "cancelled"; });
-        tasksSnapshot = undefined;
-      }
-      return;
-    }
-    case "path.open":
-    case "downloads.cache.open":
-    case "local-data.recovery.open":
-      previewSuccess("打开成功");
-      return;
-    case "local-data.prepare": {
-      const id = crypto.randomUUID();
-      const operation = { kind: payload.kind, path: payload.path };
-      dataOperations.set(id, operation);
-      return { id, ...operation,
-        ...(payload.kind === "restore" ? { backup: { createdAt: Math.floor(Date.now() / 1000), fileCount: 8, totalBytes: 1048576 } } : {}),
-      };
-    }
-    case "local-data.execute": {
-      const operation = dataOperations.get(payload.id);
-      if (operation) {
-        if (operation.kind === "migrate") data.dataDir = operation.path;
-        data.localDataResult = { ...operation, success: true,
-          message: { migrate: "本地数据迁移成功", backup: "本地数据备份成功", restore: "本地数据还原成功" }[operation.kind] };
-        dataOperations.delete(payload.id);
-        later(() => window.dispatchEvent(new Event("sfmcl-preview-restart")), 200);
-      }
-      return true;
-    }
     case "system.memory":
       return { availableMb: 16384 };
+    case "multiplayer.status":
+      return copy(multiplayer);
+    case "multiplayer.check-local-port":
+      return { reachable: true };
+    case "multiplayer.official.preview":
+    case "multiplayer.preview":
+      return { name: "周末的生存世界", gameVersion: "1.21.4", server: "" };
+    case "multiplayer.prepare":
+    case "multiplayer.create":
+    case "multiplayer.official.create":
+    case "multiplayer.join":
+    case "multiplayer.official.join":
+    case "multiplayer.leave":
+      previewSuccess("操作成功");
+      return copy(multiplayer);
     case "system.monitors":
       return {
         supported: true,
@@ -504,58 +303,6 @@ async function request(operation: string, payload: Payload) {
       return { items: copy(notices), error: "" };
     case "notices.hidden":
       return copy(hidden);
-    case "notices.visibility":
-      hidden = hidden.filter((id) => id !== payload.id);
-      if (payload.hidden) hidden.push(payload.id);
-      return copy(hidden);
-    case "notices.create":
-      notices.unshift({
-        id: crypto.randomUUID(),
-        preset: false,
-        title: payload.title,
-        content: payload.content,
-      });
-      return copy(notices);
-    case "notices.delete":
-      notices = notices.filter((n) => n.id !== payload.id);
-      return copy(notices);
-    case "downloads.control": {
-      if (payload.action === "clear")
-        tasks.downloads = tasks.downloads.filter((d) => d.id !== payload.id);
-      const download = tasks.downloads.find((d) => d.id === payload.id);
-      if (download) {
-        download.status =
-          payload.action === "pause"
-            ? "paused"
-            : payload.action === "cancel"
-              ? "cancelled"
-              : "running";
-        download.speed = download.status === "running" ? 5242880 : 0;
-      }
-      tasksSnapshot = undefined;
-      return;
-    }
-    case "downloads.files":
-      if (downloadFiles.has(payload.id))
-        return downloadFiles.get(payload.id)!.map((spec) => ({
-          spec: copy(spec), status: "completed", downloaded: spec.size || 1048576,
-          total: spec.size || 1048576, attempts: 1,
-        }));
-      return [
-        {
-          spec: {
-            url: "",
-            path: `${directory}/.minecraft/versions/1.21.4/client.jar`,
-            size: 104857600,
-          },
-          status:
-            tasks.downloads.find((d) => d.id === payload.id)?.status ||
-            "paused",
-          downloaded: 67108864,
-          total: 104857600,
-          attempts: 1,
-        },
-      ];
     case "manifest":
       return {
         versions: ["1.21.4", "1.20.1", "1.19.4"].map((id) => ({
@@ -573,19 +320,6 @@ async function request(operation: string, payload: Payload) {
           metadata: {},
         },
       ];
-    case "install":
-      return installVersion(payload);
-    case "modpacks.inspect":
-      return {
-        token: crypto.randomUUID(), format: "Modrinth", name: "示例整合包",
-        version: "1.0", minecraft: "1.21.4", loader: { kind: "Fabric", version: "0.16.10" },
-        optionalFiles: [], fileCount: 8,
-      };
-    case "modpacks.install":
-      return installVersion({ ...payload, loader: { kind: "Fabric", version: "0.16.10" } });
-    case "modpacks.discard":
-    case "modpacks.supplyFile":
-      return true;
     case "resources.categories":
       return [
         { id: "optimization", name: "性能优化" },
@@ -613,70 +347,8 @@ async function request(operation: string, payload: Payload) {
         );
       return { total: items.length, items: copy(items) };
     }
-    case "resources.detail":
-      return {
-        id: payload.id,
-        source: payload.source || "modrinth",
-        title: "示例资源",
-        description: "资源中心界面演示",
-        author: "界面演示",
-        icon: "",
-        downloads: 0,
-        categories: ["性能优化"],
-        versions: ["1.21.4"],
-        website: "",
-        body: "## 资源详情\n\n在这里查看资源介绍、适用版本与前置依赖。选择合适的版本，即可安装到你的游戏中。",
-      };
-    case "resources.files":
-      return [
-        {
-          id: "showcase-file",
-          name: "示例资源",
-          version: "1.0",
-          date: "2024-12-03",
-          gameVersions: [payload.gameVersion || "1.21.4"],
-          loaders: [payload.loader || "fabric"],
-          file: { url: "", path: "示例资源.jar", size: 1048576 },
-          dependencies: [],
-        },
-      ];
     case "resources.local":
-      return copy(localResources.filter((resource) =>
-        resource.versionId === payload.versionId && resource.item.kind === payload.kind,
-      ).map((resource) => resource.item));
-    case "resources.download": {
-      const file: DownloadSpec = payload.file;
-      const title = payload.title || file.path;
-      const id = addDownload(title, file);
-      if (payload.versionId) {
-        const folder = { mod: "mods", resourcepack: "resourcepacks", shader: "shaderpacks" }[payload.kind as string] || "downloads";
-        const version = versions.find((v) => v.id === payload.versionId);
-        const name = file.path.split(/[\\/]/).pop() || "示例资源.jar";
-        const path = `${version?.path || directory}/${folder}/${name}`;
-        if (!localResources.some((r) => r.item.path === path))
-          localResources.push({ versionId: payload.versionId, item: {
-            name, path, kind: payload.kind, entryType: "file", description: "安装成功",
-            version: "1.0", authors: "界面演示", icon: "", disabled: false,
-            size: file.size || 1048576, details: {},
-          } });
-      }
-      return id;
-    }
-    case "resources.localSize":
-      return localResources.find((r) => r.item.path === payload.path)?.item.size || 1048576;
-    case "resources.localProject":
-      return { id: "showcase-resource-0" };
-    case "resources.toggle": {
-      const resource = localResources.find((r) => r.item.path === payload.path);
-      const path = payload.disabled ? `${payload.path}.disabled` : payload.path.replace(/\.disabled$/, "");
-      if (resource) { resource.item.disabled = payload.disabled; resource.item.path = path; }
-      return path;
-    }
-    case "resources.deletePack": {
-      const index = localResources.findIndex((r) => r.item.path === payload.path);
-      if (index >= 0) localResources.splice(index, 1);
-      return true;
-    }
+      return [];
     case "image":
       return "/assets/steve.png";
     case "updates":
@@ -744,22 +416,10 @@ runtime.__TAURI_INTERNALS__ = {
       );
       return;
     }
-    if (command === "plugin:dialog|open" || command === "plugin:dialog|save") {
-      const options = args.options || {};
-      if (options.directory) {
-        if (options.title?.includes("本地数据")) return "C:/SFMCL-T-new";
-        return `${directory}/示例目录`;
-      }
-      const extensions: string[] = options.filters?.[0]?.extensions || [];
-      if (extensions.includes("exe")) return "C:/Java/jdk-21/bin/javaw.exe";
-      if (extensions.includes("png")) return "C:/SFMCL-T/skin.png";
-      if (command === "plugin:dialog|save") return `C:/SFMCL-T/${options.defaultPath || "data-backup.zip"}`;
-      return options.title?.includes("本地数据备份") ? "C:/SFMCL-T/data-backup.zip" : "C:/SFMCL-T/示例整合包.mrpack";
-    }
+    if (command === "plugin:dialog|open" || command === "plugin:dialog|save")
+      return null;
     if (command === "plugin:opener|open_url") {
-      if (args.url === authorizationUrl) return;
-      if (/^https?:\/\//.test(args.url))
-        window.open(args.url, "_blank", "noopener,noreferrer");
+      previewSuccess("打开成功");
       return;
     }
     if (

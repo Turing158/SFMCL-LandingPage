@@ -58,3 +58,8 @@
   backdrop-filter: none;
   background: rgb(0 0 0 / 10%);
 }
+
+/* Deep detail entries keep their original appearance in the showcase. */
+[data-preview-inert="true"] {
+  cursor: default;
+}

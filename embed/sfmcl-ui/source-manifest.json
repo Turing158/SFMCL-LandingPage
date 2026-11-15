@@ -1,5 +1,6 @@
 {
   "source": "D:\\EducationalData\\rust\\SFMCL-T\\SFMCL-T",
+  "version": "1.0.0",
   "files": [
     {
       "path": "AnimatedNoticeList.tsx",
@@ -15,7 +16,7 @@
     },
     {
       "path": "App.tsx",
-      "sha256": "a7bfc17dfba4fd5f85059f23872d97fcbe5b83a8149b2002f5efae8744feafa8"
+      "sha256": "3315cccf4f83662f48368fc01eba382f49f3cc23324e7eb294b08d8c2313b875"
     },
     {
       "path": "autoSave.ts",
@@ -31,7 +32,7 @@
     },
     {
       "path": "components.tsx",
-      "sha256": "e116481f3a69bb2b007bfd46fe2c8d4038858a9eeaf1d0e3de2eeac040c7a21c"
+      "sha256": "2061c82b8e3e2fb4de1d99b4c509b522fafd5905ef10ee972736518b7456c700"
     },
     {
       "path": "confirmation.ts",
@@ -56,6 +57,22 @@
     {
       "path": "controls.tsx",
       "sha256": "bc8f7a0672c23576413c596a3d2ebf7588b8a7a335eab55e20c155951665b2bb"
+    },
+    {
+      "path": "download-mining.css",
+      "sha256": "983f91dfc8d8a1a1ddb1f1478c28a793bcefbc1583a8979c8615d8671ecd6119"
+    },
+    {
+      "path": "DownloadMining.tsx",
+      "sha256": "c5e6d5cfddf8398c655d96d85a6e649342d8ba2f975ff2c2567cf0204f4b1b6e"
+    },
+    {
+      "path": "downloadMiningMotion.ts",
+      "sha256": "9c7ec82ef1150fdea3785c553c15f43cadf313514f78fbad9b7e05452bbce74b"
+    },
+    {
+      "path": "downloadMiningState.ts",
+      "sha256": "c32e752b1b017eebe759d8551b1af9afdf8f2f281b7d54272bc7cd99c77094ed"
     },
     {
       "path": "downloads.css",
@@ -91,7 +108,7 @@
     },
     {
       "path": "gameSettings.ts",
-      "sha256": "bb956d4aecdf8d4729d0bcd8fb82966134e21c3767b197932991bd5291f7031a"
+      "sha256": "cdc753dd86d7cba30a596da2be75e608bcc06aa6a095a273a567b391696fa0dc"
     },
     {
       "path": "home-content.css",
@@ -123,19 +140,15 @@
     },
     {
       "path": "launch-dock.css",
-      "sha256": "4b00d267e25e450889f446aec91d91b0f414de6be74a1801558ae72b6c0f8ba5"
+      "sha256": "b2d26e2f069900a3a87092b3f57f1d94cfd0f3529e3aa6046ce5481c3eaa4a0a"
     },
     {
       "path": "LaunchDock.tsx",
-      "sha256": "346ac5fe25e781a617eb3369587777cf8c755e1449aa789fbfe19c49e232add8"
+      "sha256": "0e2482737b81e2d394ba871a413ac166561a9ab44201df0261238b6d2d93478e"
     },
     {
       "path": "launchState.ts",
-      "sha256": "090a25ae895e9c6bb0a89325e86a188c63b3d87036fe18323d15647ad7fd0ed8"
-    },
-    {
-      "path": "legacyPreferences.ts",
-      "sha256": "0848bfa2c41d08fa94693bbe257bd3bfc389b6e66ede97eac6d01db21fdd3f5e"
+      "sha256": "d20f1538f973e16e8003429ae3712cd08ced027800461f61e382ae12dfc60156"
     },
     {
       "path": "LocalDataSettings.tsx",
@@ -144,10 +157,6 @@
     {
       "path": "localResources.ts",
       "sha256": "a460bae28d1bdd9a487a3cc277b27d5cc06263f23bdd84d196380bf243ead146"
-    },
-    {
-      "path": "main.tsx",
-      "sha256": "2d70a50c8eecf160debd8e8ed4d51cfcef07efd9b2d1791034997be4a45a8812"
     },
     {
       "path": "modpack-drop.css",
@@ -162,8 +171,12 @@
       "sha256": "163f6bac19a27707929ffa5aa68de2148303cd150b3fc67fe240c3ba42dbf93d"
     },
     {
+      "path": "multiplayer.css",
+      "sha256": "0602b7408afedae6ec4b1b6a45eb26ab12dcd77ba944956bfc26a50944f19e3b"
+    },
+    {
       "path": "navigation.ts",
-      "sha256": "e5a97635e105b9aaf8dd38646b297022fcc1c7bab22078614c35ffc66b62344d"
+      "sha256": "1b84abf8fe0b811a58120c4f73dbae1c8a8d77f2182c78942f1c126ed63afca1"
     },
     {
       "path": "notices.css",
@@ -203,11 +216,11 @@
     },
     {
       "path": "pages/Downloads.tsx",
-      "sha256": "42d0e047e1c6899fabcb7989d75ae0c2af49b8976d54d4c35174e238d6570d1f"
+      "sha256": "0b6dc4aa8bbb2f11196791ffbd8f52546498c015e853394653b6a68fd5850b40"
     },
     {
       "path": "pages/GameSettingsFields.tsx",
-      "sha256": "4d411e06f6a67279fb1e577b68f3b86b472ddaeeb082307133acfe2fbebe64a6"
+      "sha256": "0b5950d1b22eec1be43a1d61805ef9db0c4b5a69544bcaf8a840dde0fd49c86d"
     },
     {
       "path": "pages/InstallComponentCard.tsx",
@@ -242,6 +255,18 @@
       "sha256": "ec8af54f6ac0d7ab7b7b03495ba76d21ba1ed591cb62b20833bf6d60a76b7c96"
     },
     {
+      "path": "pages/Multiplayer.tsx",
+      "sha256": "35295150379f40d287e00cf382800d46518fe8c4c982ef7b00397751ca8edd3a"
+    },
+    {
+      "path": "pages/MultiplayerInviteInput.tsx",
+      "sha256": "7b3387fd8b8957822f9ce6c5019167054c5bcb10d5663c3337124aa131b98f91"
+    },
+    {
+      "path": "pages/MultiplayerOfflineLan.tsx",
+      "sha256": "225516af43e0a59d82eb2ed529156fcbf64fa20aec80cb4d06051cb75f7d8f6d"
+    },
+    {
       "path": "pages/PlayerAppearancePreview.tsx",
       "sha256": "47eece79503c4b757f34492068844cd538999003df4572d661775f9e3f867757"
     },
@@ -251,11 +276,11 @@
     },
     {
       "path": "pages/PlayerLittleSkinLogin.tsx",
-      "sha256": "e70aa283c4a727ca087a524b02fcf77d9aa62db3014adf8e65bbf835e6625524"
+      "sha256": "7cc5f1e3aa8ba596da036e15622d5b70106c6dc78692661dc3164f7b9eabfbd6"
     },
     {
       "path": "pages/PlayerLogin.tsx",
-      "sha256": "da92118c2aee08a526cf32ca12895e7daa00e844d34df4fd2165de38e0823338"
+      "sha256": "1f47afc0260ff36f9f17c54dc7267061b95a0a407b3f40bfc989d2c995c1a284"
     },
     {
       "path": "pages/PlayerProfileDialog.tsx",
@@ -263,7 +288,7 @@
     },
     {
       "path": "pages/Players.tsx",
-      "sha256": "b12153579724ee2f139eb6df0a2e249393df33c1191de2eca16e2261cfaaf0f8"
+      "sha256": "f87aec31b04454ff1a4da1e0593b9d595df71ef05745a7fb56d1d85db21d0b6c"
     },
     {
       "path": "pages/PlayerSkinDialog.tsx",
@@ -271,7 +296,7 @@
     },
     {
       "path": "pages/PlayerYggdrasilLogin.tsx",
-      "sha256": "90bff20ce49141e8567163768669b8f4d2da3334e3cd4d369f7bd5c50864abd5"
+      "sha256": "31f67923fbf6a6fc225fb12911771223d02e2fe60f5ea49c1509f8483b55e528"
     },
     {
       "path": "pages/ProjectFileItem.tsx",
@@ -299,7 +324,7 @@
     },
     {
       "path": "pages/Settings.tsx",
-      "sha256": "5ba726be6e900f9b8af486cab5c149ca2d844fbc75f382102eef2031ac03ab02"
+      "sha256": "f1adb99b0d1aa5af4b4fcf6f58b4a949957e220ab0dd196f2ffda8cae3ab6d6c"
     },
     {
       "path": "pages/useInstallCatalog.ts",
@@ -307,7 +332,7 @@
     },
     {
       "path": "pages/Versions.tsx",
-      "sha256": "dd4c5ef6ede6d79c8a7250cc7d61acf963e2c589ce0c87fe5757644826b5d08e"
+      "sha256": "52a2fa4f1cf32b7244a1210a2291c794ff5aa68bf4801027a99e887031d3bb7b"
     },
     {
       "path": "pages/VersionSettings.tsx",
@@ -327,7 +352,7 @@
     },
     {
       "path": "player-login.css",
-      "sha256": "60747f040ede6e5653cd91d133c91c2feaeaf5d827941c422ceb71bca29f6ac9"
+      "sha256": "9f4b1793cad692fd53234dc1baa3687ce027d202e8bd32d5950c3e32a885646d"
     },
     {
       "path": "player3dActions.ts",
@@ -398,48 +423,20 @@
       "sha256": "6ac84bee988ac6b4f1bbd1fbb1d9f6ac5a4a9aeb5da7343f077d32996dc49d17"
     },
     {
-      "path": "startup.css",
-      "sha256": "1a3f17a9ec18974f190470fb3c10407a3e9a7a181d8f8b835fabe48ad3bc52c1"
-    },
-    {
-      "path": "startup.ts",
-      "sha256": "a5f47c750875f9a96ca2e8738692f64e6933d81e8e5854cbb89f502942f65c73"
-    },
-    {
-      "path": "startupAnimation.ts",
-      "sha256": "3cdb2e3b3eb410353f621e565490683e4acd4e7daa978b9cdddfbc84634e95eb"
-    },
-    {
-      "path": "StartupBoundary.tsx",
-      "sha256": "46f736bd6f32f5b1e19b70234a612fe100e01b0c13c064d930fa978d13ac2ff0"
-    },
-    {
-      "path": "startupIconMark.ts",
-      "sha256": "110411e60f32ba51a9360fda004d58b5a2e7e03d544fa55a86b7153e58bc51a9"
-    },
-    {
       "path": "startupReadiness.ts",
       "sha256": "4a6c3910d0a606d7434bc7d690dd6915d3ea28fbefec31ab1cd2c4d4f72e005c"
-    },
-    {
-      "path": "startupScreen.ts",
-      "sha256": "cfb06c71c8be9f410328329e7c799098ce5445bfd2876c99dc79326a47310f16"
     },
     {
       "path": "startupTimeout.ts",
       "sha256": "d04072735fcd84aa658a82dd6795bd3b622987b208d6c2cca80d3354d733fdc3"
     },
     {
-      "path": "startupWindow.ts",
-      "sha256": "13044d0ac806850a71f6fc70c6275693a8ec1b58c217e0cedf50110b628994d4"
-    },
-    {
       "path": "store.tsx",
-      "sha256": "8362b77f4b7102a451a603df5f3c413e4ad57751ab38c4bde0ab83f1680a9fbc"
+      "sha256": "940ab4c1d9af113ee2c2a163ba628446828bdac30719e12febca9ff3a484a431"
     },
     {
       "path": "styles.css",
-      "sha256": "72568ad73b37ca7640475080dc2707f858a686159cabc1ec184dc0386238f754"
+      "sha256": "2c80ec326db1b9e1c70353f23bb6df3e687699fb7ac05b2ca976097f89531c08"
     },
     {
       "path": "surfaceMotion.ts",
@@ -463,7 +460,7 @@
     },
     {
       "path": "types.ts",
-      "sha256": "93e41d24e75d00b9f14ad9b64db149a1f1aa868e1ec062b0b1eb2091b68a8565"
+      "sha256": "2c3fec222f967f88d8ea7cf2ce5b799a4800133ad96c13db140b0c8367dcf906"
     },
     {
       "path": "UpdateCheckButton.tsx",
@@ -491,15 +488,27 @@
     },
     {
       "path": "useHomeScrollPadding.ts",
-      "sha256": "631e6996920e4d6a45f2fa3cd46960f5af8809c792e21599a7460158a9340ddf"
+      "sha256": "ab34e8d2ec556970502d747d407b319dc5a5e11d86aebb7c835433b89e4828b5"
     },
     {
       "path": "useImageResource.ts",
       "sha256": "f52fb42058ae886658b57dff89c67feee92861b10e39887d95b5460fdbe72084"
     },
     {
+      "path": "useLauncherQuit.ts",
+      "sha256": "b58a80f45026d48a482efb1471f328030d9e833b0ad611f31676e6081299b044"
+    },
+    {
+      "path": "useLittleSkinLogin.ts",
+      "sha256": "ce4a8c96fc734d0ab1df52d72a726a23d7fb47d83b9d43f19a2b0cf15c406094"
+    },
+    {
       "path": "useModalMotion.ts",
       "sha256": "3132935ccc6ce5c7f5d5da83f62cb6e604e45e8bf01b1369cb13e89b8c8a98e0"
+    },
+    {
+      "path": "useMultiplayer.ts",
+      "sha256": "f73d19bc7c57a2ef17b9a81dd516142598350cc6dc7a6d6e6725ea1dea965269"
     },
     {
       "path": "useNavigationTransition.ts",
@@ -519,11 +528,11 @@
     },
     {
       "path": "usePlayerLogin.ts",
-      "sha256": "77239ff4930205cd19ee34feec0310cfd99d36e98391d4c8517a8317d0284ae2"
+      "sha256": "e0caa26fe513624203698d0d1b253f67a755322e2ccf8a9644641ac34092e713"
     },
     {
       "path": "usePlayerLoginTransition.ts",
-      "sha256": "d9b4db45c1df8d94b8d949d8b1701164fb18d9810d7cee31127070728919146b"
+      "sha256": "13deaa0853cedb7c8e63d2957013db9b6d68dc3a0cf3c2286bc50d6c0f81aad0"
     },
     {
       "path": "usePlayerViewTransition.ts",
@@ -567,15 +576,11 @@
     },
     {
       "path": "versions.css",
-      "sha256": "cc2db6888eaa2fdef7e8fe4aead66cba583f4e53a3a1a92f96dbb22159a0cdc9"
-    },
-    {
-      "path": "vite-env.d.ts",
-      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+      "sha256": "b284c29d582c703822414494b4a15cb817a04e42d41395519bfc898303870e7b"
     },
     {
       "path": "window-motion.css",
-      "sha256": "be163c891773c7b33095d8d51bed86e7007fddc6d636d9f3a3423a9a34ede3c5"
+      "sha256": "b51f3e7f37ab22955c79647b7c2ab0c91aac26643c80e7abf01218530cc183ab"
     },
     {
       "path": "windowDrag.ts",
