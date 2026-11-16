@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { X } from "lucide-react";
 import type { Theme } from "./App";
 
 export default function LauncherPreview({ theme }: { theme: Theme }) {
@@ -9,7 +8,6 @@ export default function LauncherPreview({ theme }: { theme: Theme }) {
   const panel = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
-  const closeButton = useRef<HTMLButtonElement>(null);
   const closeTimer = useRef<number | null>(null);
   const initialSource = useRef(`./embed/sfmcl-ui/index.html?theme=${theme}`);
   const openPreview = useCallback(() => {
@@ -86,7 +84,7 @@ export default function LauncherPreview({ theme }: { theme: Theme }) {
       element = element.parentElement;
     }
     document.body.style.overflow = "hidden";
-    closeButton.current?.focus({ preventScroll: true });
+    frame.current?.focus({ preventScroll: true });
     return () => {
       document.body.style.overflow = previousOverflow;
       saved.forEach(({ element, inert }) => {
@@ -146,9 +144,6 @@ export default function LauncherPreview({ theme }: { theme: Theme }) {
         <div
           ref={panel}
           className={`launcher-preview-panel ${expanded ? "is-expanded" : ""} ${closing ? "is-closing" : ""}`}
-          role={expanded ? "dialog" : undefined}
-          aria-modal={expanded ? true : undefined}
-          aria-labelledby={expanded ? "launcher-preview-title" : undefined}
         >
           {expanded && (
             <button
@@ -158,35 +153,18 @@ export default function LauncherPreview({ theme }: { theme: Theme }) {
               tabIndex={-1}
             />
           )}
-          <div className="launcher-preview-window">
-            {expanded && (
-              <div className="launcher-preview-header">
-                <span id="launcher-preview-title">
-                  SFMCL-T · 软件界面展示
-                </span>
-                <button
-                  ref={closeButton}
-                  className="icon-button"
-                  onClick={closePreview}
-                  aria-label="关闭软件界面预览"
-                >
-                  <X size={23} />
-                </button>
-              </div>
-            )}
-            <div className="launcher-preview">
-              <div className="launcher-viewport" ref={viewport}>
-                <iframe
-                  ref={frame}
-                  src={initialSource.current}
-                  title="SFMCL-T 原版前端界面"
-                  width="1120"
-                  height="640"
-                  style={{ transform: `scale(${scale})` }}
-                  onLoad={() => { syncTheme(); syncMotion(); }}
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                />
-              </div>
+          <div className="launcher-preview">
+            <div className="launcher-viewport" ref={viewport}>
+              <iframe
+                ref={frame}
+                src={initialSource.current}
+                title="SFMCL-T 原版前端界面"
+                width="1120"
+                height="640"
+                style={{ transform: `scale(${scale})` }}
+                onLoad={() => { syncTheme(); syncMotion(); }}
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+              />
             </div>
           </div>
         </div>

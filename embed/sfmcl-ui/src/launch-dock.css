@@ -13,21 +13,232 @@
     0 -4px 8px color-mix(in srgb, var(--shadow-color), transparent 50%)
   );
 }
-.launch-dock-main {
+.launch-dock[data-has-processes] .launch-dock-main {
+  touch-action: none;
+  user-select: none;
+}
+.launch-dock[data-dragging] .launch-dock-card {
+  scale: 1;
+}
+.launch-process-toggle {
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  height: 22px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    color 180ms ease,
+    visibility 0s linear 180ms;
+}
+.launch-dock[data-has-processes] .launch-process-toggle {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+.launch-process-toggle-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.launch-process-toggle:hover .launch-process-toggle-content {
+  transform: translateY(-3px);
+}
+.launch-process-toggle:is(:hover, :focus-visible) {
+  color: var(--accent);
+}
+.launch-process-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+.launch-processes {
+  padding: 8px calc(var(--launch-gutter) - var(--launch-card-inset) + 1px) 12px;
+  max-height: min(200px, max(0px, calc(100dvh - var(--topbar-height) - 200px)));
+  overflow-y: auto;
+}
+.launch-processes-clip {
+  overflow: clip;
+}
+.launch-processes-clip[hidden] {
+  display: none;
+}
+.launch-process-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: max-content;
+  gap: 10px 12px;
+  padding: 2px 2px 6px;
+}
+.launch-process-card {
+  --surface-fill: var(--panel);
+  --surface-edge: var(--line);
+  --surface-depth: 0px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+}
+.launch-process-card > .surface-frame::before,
+.launch-process-card > .surface-frame::after {
+  transition: background-color 220ms ease;
+}
+.launch-process-restore {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+}
+.launch-process-restore::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.launch-process-restore > :is(.resource-icon, .launch-process-copy) {
+  position: relative;
+}
+.launch-process-card:has(
+  .launch-process-restore:is(:hover, :focus-visible):not(:disabled)
+) {
+  --surface-edge: var(--accent);
+  --surface-fill: color-mix(in srgb, var(--panel), var(--soft) 70%);
+}
+.launch-process-restore:is(:hover, :focus-visible):not(:disabled)
+  .launch-process-copy > strong {
+  color: var(--accent);
+}
+.launch-process-card:has(.launch-process-restore:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.launch-process-restore:focus-visible {
+  outline: none;
+}
+.launch-process-restore > .resource-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+}
+.launch-process-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.launch-process-copy > :is(strong, time) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.launch-process-copy > strong {
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 18px;
+  transition: color 220ms ease;
+}
+.launch-process-copy > time {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 14px;
+}
+.launch-dock .launch-process-stop {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--danger);
+  transform: none;
+  transition:
+    color 220ms ease,
+    opacity 220ms ease;
+}
+.launch-process-stop::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  z-index: -1;
+  background: var(--surface-danger-bg);
+  clip-path: var(--corner-control);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+.launch-dock .launch-process-stop:is(:hover, :focus-visible):not(:disabled) {
+  color: color-mix(in srgb, var(--danger), var(--ink) 15%);
+}
+.launch-process-stop:is(:hover, :focus-visible):not(:disabled)::after {
+  opacity: 1;
+}
+.launch-dock .launch-process-stop:active:not(:disabled) {
+  color: color-mix(in srgb, var(--danger), var(--ink) 30%);
+  transform: none;
+}
+.launch-dock .launch-process-stop:focus-visible {
+  outline: 2px solid var(--danger);
+  outline-offset: -4px;
+}
+@media (max-width: 900px) {
+  .launch-process-card {
+    padding-inline: 10px;
+  }
+}
+@media (max-width: 650px) {
+  .launch-process-grid {
+    gap: 8px;
+  }
+  .launch-process-card {
+    gap: 6px;
+    padding: 8px;
+  }
+  .launch-process-restore {
+    gap: 6px;
+  }
+  .launch-process-restore > .resource-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .launch-process-copy > strong {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .launch-process-copy > time {
+    font-size: 9px;
+    line-height: 12px;
+  }
+  .launch-dock .launch-process-stop {
+    flex-basis: 32px;
+    width: 32px;
+    height: 36px;
+  }
+}
+.launch-dock-card {
   --launch-corner-step: 3px;
   --launch-corner-size: calc(2 * var(--launch-corner-step));
   position: relative;
-  min-height: 84px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
   margin-inline: var(--launch-card-inset);
-  padding: 12px calc(var(--launch-gutter) - var(--launch-card-inset));
-  border: 1px solid var(--line);
-  border-bottom: 0;
   border-radius: 0;
-  /* The bottom joins the status strip; only the two top corners are cut out. */
+  /* The entire card shares its outline, background and painted motion. */
   clip-path: polygon(
     var(--launch-corner-size) 0,
     calc(100% - var(--launch-corner-size)) 0,
@@ -43,6 +254,10 @@
     var(--launch-corner-size) var(--launch-corner-step)
   );
   background: var(--panel);
+  box-shadow:
+    inset 0 1px 0 var(--line),
+    inset 1px 0 0 var(--line),
+    inset -1px 0 0 var(--line);
   overflow: clip;
   /* Keep the raster layer stable through exit; alpha and inert hide the card. */
   opacity: var(--launch-card-alpha);
@@ -52,8 +267,19 @@
   transform-origin: center bottom;
   transition: scale 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.launch-dock-main:hover {
+.launch-dock-card:hover,
+.launch-dock[data-processes-expanded] .launch-dock-card {
   scale: 1;
+}
+.launch-dock-main {
+  position: relative;
+  cursor: default;
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 13px calc(var(--launch-gutter) - var(--launch-card-inset) + 1px) 12px;
 }
 .launch-dock .launch-version {
   flex: 1;
@@ -68,12 +294,6 @@
 }
 .launch-version-copy {
   min-width: 0;
-}
-.launch-dock .overline {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 14px;
 }
 .launch-version-title {
   display: flex;
@@ -217,89 +437,131 @@
 .launch-switch[aria-expanded="true"] > svg {
   transform: rotate(180deg);
 }
-.launch-dock .launch-actions .launch-primary {
-  --launch-feedback-ink: var(--pixel-on-accent);
+@property --launch-button-progress {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+.launch-dock .launch-actions > .launch-primary {
+  --launch-button-color: var(--accent);
+  --launch-button-hover: var(--accent-hover);
+  --launch-button-ink: var(--pixel-on-accent);
+  --launch-feedback-ink: var(--launch-button-ink);
+  --surface-fill: var(--soft);
+  --surface-edge: color-mix(in srgb, var(--launch-button-color), #000 24%);
+  --surface-base: color-mix(in srgb, var(--launch-button-color), #000 38%);
   flex: 0 0 auto;
   width: 156px;
   min-width: 156px;
   height: 46px;
   font-size: 13px;
   gap: 10px;
+  transition:
+    var(--surface-depth-transition),
+    transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.launch-dock .launch-actions > .launch-primary:focus-visible:not(:disabled) {
-  --surface-fill: var(--accent-hover);
+.launch-dock .launch-actions > .launch-primary[data-progress-active] {
+  transition:
+    var(--surface-depth-transition),
+    --launch-button-progress 240ms linear,
+    transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.launch-dock
+  .launch-actions
+  > .launch-primary:is(:hover, :focus-visible):not(:disabled) {
+  --launch-button-color: var(--launch-button-hover);
 }
 .launch-dock .launch-actions > .launch-primary:active:not(:disabled) {
-  --surface-fill: color-mix(in srgb, var(--accent-hover), #000 12%);
-}
-.launch-primary .launch-control-fx::before {
-  background: linear-gradient(
-    90deg,
-    transparent 35%,
-    color-mix(in srgb, var(--launch-feedback-ink) 9%, transparent) 35% 45%,
-    color-mix(in srgb, var(--launch-feedback-ink) 18%, transparent) 45% 55%,
-    color-mix(in srgb, var(--launch-feedback-ink) 9%, transparent) 55% 65%,
-    transparent 65%
+  --launch-button-color: color-mix(
+    in srgb,
+    var(--launch-button-hover),
+    #000 12%
   );
 }
-.launch-primary:is(:hover, :focus-visible):not(:disabled)
-  .launch-control-fx::before {
-  animation: launch-control-sweep 420ms steps(16, end);
+.launch-primary .launch-control-fx {
+  z-index: 1;
 }
-@keyframes launch-control-sweep {
-  from {
-    opacity: 1;
-    transform: translateX(-65%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(65%);
-  }
+.launch-button-surface {
+  position: absolute;
+  inset: var(--surface-stroke);
+  clip-path: var(--surface-inset-shape);
+  pointer-events: none;
 }
-.launch-dock[data-state="running"] .launch-primary:not(:disabled) {
+.launch-button-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.launch-button-layer > svg {
+  flex-shrink: 0;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+.launch-button-base {
+  color: var(--ink);
+}
+.launch-button-fill {
+  /* One clipped layer paints both the fill and the matching parts of each glyph. */
+  background: var(--launch-button-color);
+  color: var(--launch-button-ink);
+  clip-path: inset(0 calc(100% - var(--launch-button-progress)) 0 0);
+  transition: background-color 180ms ease;
+}
+.launch-button-fill-label::before {
+  content: attr(data-label);
+}
+.launch-dock[data-state="ready"] .launch-actions > .launch-primary {
   --launch-feedback-ink: var(--accent);
-  --surface-fill: var(--soft);
-  color: var(--accent);
 }
-.launch-dock[data-state="running"]
-  .launch-primary:is(:hover, :focus-visible):not(:disabled) {
-  --surface-fill: color-mix(in srgb, var(--accent) 12%, var(--soft));
+.launch-dock[data-state="ready"] .launch-button-surface {
+  background: var(--soft);
 }
-.launch-dock[data-state="running"] .launch-primary:active:not(:disabled) {
-  --surface-fill: color-mix(in srgb, var(--accent) 20%, var(--soft));
+.launch-dock[data-state="running"] .launch-actions > .launch-primary {
+  --launch-button-color: var(--surface-success);
+  --launch-button-hover: color-mix(
+    in srgb,
+    var(--surface-success),
+    var(--ink) 10%
+  );
 }
-.launch-dock .launch-actions > .button:disabled {
-  --launch-feedback-ink: var(--accent);
+.launch-dock[data-warning] .launch-actions > .launch-primary {
+  --launch-button-color: var(--surface-warning);
+  --launch-button-hover: color-mix(
+    in srgb,
+    var(--surface-warning),
+    var(--ink) 10%
+  );
+  --surface-fill: var(--surface-warning-bg);
+}
+.launch-dock[data-error] .launch-actions > .launch-primary {
+  --launch-button-color: var(--danger);
+  --launch-button-hover: color-mix(in srgb, var(--danger), var(--ink) 10%);
+  --surface-fill: var(--surface-danger-bg);
+}
+.launch-dock[data-state="cancelling"] .launch-actions > .launch-primary {
+  --launch-button-color: var(--surface-info);
+  --launch-button-hover: color-mix(
+    in srgb,
+    var(--surface-info),
+    var(--ink) 10%
+  );
+  --surface-fill: var(--surface-info-bg);
 }
 .launch-status {
   min-width: 0;
   height: 28px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 18px;
   padding: 0 var(--launch-gutter);
   border-top: 1px solid transparent;
   background: transparent;
   color: var(--chrome-muted);
   font-size: 12px;
-}
-.launch-status-detail {
-  display: flex;
-  flex: 1;
-  gap: 8px;
-  align-items: center;
-  justify-content: flex-start;
-  min-width: 0;
-}
-.launch-status-detail > .footer-status-icon {
-  flex-shrink: 0;
-  color: var(--chrome-accent);
-}
-.launch-status-message {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .launch-status-player {
   display: flex;
@@ -321,68 +583,49 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.launch-status-caption {
-  flex-shrink: 0;
-  font-size: 11px;
-  letter-spacing: 0.3px;
-}
-.launch-dock[data-warning] .launch-status-detail,
-.launch-dock[data-warning] .launch-status-detail > .footer-status-icon {
-  color: color-mix(in srgb, var(--surface-warning), white 55%);
-}
-.launch-dock[data-error] .launch-status {
-  --footer-status-fill: var(--surface-danger-bg);
-  color: var(--danger);
-}
-.launch-dock[data-error] .launch-status-detail > .footer-status-icon {
-  color: var(--danger);
-}
-.launch-progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  overflow: hidden;
-  background: var(--soft);
-}
-.launch-progress > span {
-  display: block;
-  height: 100%;
-  width: 100%;
-  background: var(--accent);
-  transform-origin: left;
-  transform: scaleX(var(--launch-progress, 0));
-  transition: transform 240ms;
-}
-.launch-progress.indeterminate > span {
-  width: 30%;
-  animation: launch-pending 1.3s ease-in-out infinite alternate;
-}
-@keyframes launch-pending {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(333%);
-  }
-}
 .app.has-launch-dock > .notification-deck {
   --notification-bottom: calc(var(--launch-dock-height, 120px) + 8px);
 }
 
 .launch-version-picker.panel {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  right: calc(var(--launch-gutter) + 166px);
+  --launch-picker-shadow-color: color-mix(
+    in srgb,
+    var(--sidebar) 18%,
+    transparent
+  );
+  --launch-picker-shadow: drop-shadow(
+      0 2px 2px var(--launch-picker-shadow-color)
+    )
+    drop-shadow(
+      0 6px 9px
+        color-mix(in srgb, var(--launch-picker-shadow-color) 55%, transparent)
+    );
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  border: 0;
+  color: var(--ink);
+  overflow: visible;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   width: 400px;
-  max-width: calc(100% - var(--launch-gutter) * 2);
-  max-height: calc(100dvh - var(--launch-dock-height, 120px) - 68px);
+  max-width: calc(100dvw - 16px);
   padding: 0;
-  filter: drop-shadow(0 12px 20px var(--shadow-color));
-  animation: launch-picker-enter 180ms ease-out;
+  /* Cast from the stepped frame without clipping the shadow's soft edges. */
+  filter: var(--launch-picker-shadow);
+  transition:
+    var(--surface-depth-transition),
+    filter 240ms ease;
+}
+:root[data-theme="dark"] .launch-version-picker.panel {
+  --launch-picker-shadow-color: rgb(0 0 0 / 32%);
+}
+.launch-version-picker::backdrop {
+  background: transparent;
+}
+.workspace-footer-region .launch-version-picker[data-state="closed"] {
+  pointer-events: none;
 }
 .launch-version-picker button {
   transition:
@@ -401,16 +644,6 @@
   --surface-depth: 2px;
   --surface-fill: color-mix(in srgb, var(--accent) 16%, var(--panel));
   transform: none;
-}
-@keyframes launch-picker-enter {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 .launch-picker-heading {
   flex: 0 0 auto;
@@ -641,9 +874,6 @@
     width: 39px;
     height: 39px;
   }
-  .launch-dock .overline {
-    display: none;
-  }
   .launch-version-title {
     margin: 0 0 4px;
   }
@@ -668,15 +898,6 @@
   }
   .launch-status-player {
     max-width: 58%;
-  }
-  .launch-status-detail {
-    gap: 5px;
-  }
-  .launch-status-caption {
-    display: none;
-  }
-  .launch-version-picker.panel {
-    right: var(--launch-gutter);
   }
 }
 @media (max-width: 650px) {

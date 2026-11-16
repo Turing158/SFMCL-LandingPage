@@ -21,8 +21,6 @@ const revealSelector = [
   ".download-notes",
   ".download-source",
   ".docs-sidebar",
-  ".docs-article > h1",
-  ".docs-lead",
   ".release-entry",
   ".footer-top",
   ".footer-bottom",

@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useLayoutEffect, useRef, useState } from "react";
 
 const normalize = (value: string) => value.replace(/[\s-]/g, "").toUpperCase();
 
@@ -16,15 +16,25 @@ export function MultiplayerInviteInput({
   onSubmit: () => void;
 }) {
   const input = useRef<HTMLInputElement>(null);
+  const pendingCaret = useRef<number | null>(null);
   const [focused, setFocused] = useState(false);
   const [selection, setSelection] = useState({ start: 0, end: 0 });
+  useLayoutEffect(() => {
+    const caret = pendingCaret.current;
+    pendingCaret.current = null;
+    // Restore during the value commit, before another keyboard event can move it.
+    if (caret !== null) input.current?.setSelectionRange(caret, caret);
+  });
   const select = (start: number, end = start) => {
     input.current?.setSelectionRange(start, end);
     setSelection({ start, end });
   };
   const update = (next: string, caret: number) => {
-    onValueChange(next.slice(0, 8));
-    requestAnimationFrame(() => select(Math.min(caret, 8)));
+    const normalized = next.slice(0, 8);
+    const position = Math.min(caret, normalized.length);
+    pendingCaret.current = position;
+    onValueChange(normalized);
+    setSelection({ start: position, end: position });
   };
   return (
     <div className="multiplayer-invite-boxes" data-disabled={disabled}>

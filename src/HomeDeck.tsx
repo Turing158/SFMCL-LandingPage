@@ -292,6 +292,12 @@ export default function HomeDeck({ slides }: { slides: HomeSlide[] }) {
     };
     let touch: { x: number; y: number } | null = null;
     const onTouchStart = (event: TouchEvent) => {
+      const scroll = event.target instanceof Element ? event.target.closest<HTMLElement>(".deck-scroll") : null;
+      if (scroll && scroll.scrollHeight > scroll.clientHeight + 1 &&
+        /auto|scroll/.test(getComputedStyle(scroll).overflowY)) {
+        touch = null;
+        return;
+      }
       const point = event.touches[0];
       touch = event.touches.length === 1 && point && !blocked() && !busy.current ?
         { x: point.clientX, y: point.clientY } : null;

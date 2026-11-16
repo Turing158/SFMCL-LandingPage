@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import {
   ArrowDownToLine,
   ArrowRight,
-  ArrowUpRight,
   Box,
   Check,
   ChevronRight,
   Compass,
+  ExternalLink,
   Folder,
   Github,
   Layers3,
@@ -106,7 +106,7 @@ function Hero({
               rel="noreferrer"
             >
               <Github size={18} />
-              看看源码 <ArrowUpRight size={16} />
+              看看源码 <ExternalLink size={16} aria-hidden="true" />
             </a>
           </div>
           <div className="hero-meta">
@@ -210,7 +210,7 @@ function Features({ theme }: { theme: Theme }) {
               </span>
             </div>
             <h3>每个世界，各有空间。</h3>
-            <p>版本独立管理，模组与存档井井有条。</p>
+            <p>独立目录、游戏多开，随时切换与管理。</p>
           </article>
           <article className="feature-card download-feature">
             <div className="card-label">
@@ -237,7 +237,7 @@ function Features({ theme }: { theme: Theme }) {
               </div>
             </div>
             <h3>下载进度，心中有数。</h3>
-            <p>暂停、继续、重试，自动校验文件。</p>
+            <p>自动选源、文件校验，支持暂停与重试。</p>
           </article>
           <article
             className="feature-card appearance-feature"
@@ -415,7 +415,7 @@ function Resources() {
               onClick={() => setSelected(index)}
             >
               {item.name}
-              {selected === index && <ArrowUpRight size={15} />}
+              {selected === index && <Check size={15} aria-hidden="true" />}
             </button>
           ))}
         </div>
@@ -439,10 +439,10 @@ function Resources() {
                 <img className="resource-project-icon" src={`./assets/resource-${card.slug}.png`}
                   alt={`${card.title} 项目图标`} width={82} height={82} loading="lazy" decoding="async" />
                 <span className="resource-tag">{card.tag}</span>
-                <ArrowUpRight className="resource-art-arrow" size={19} aria-hidden="true" />
+                <ExternalLink className="resource-art-arrow" size={19} aria-hidden="true" />
               </div>
               <div className="resource-card-copy">
-                <h4>{card.title}<ArrowUpRight size={17} aria-hidden="true" /></h4>
+                <h4>{card.title}<ExternalLink size={17} aria-hidden="true" /></h4>
                 <p>{card.desc}</p>
               </div>
             </a>
@@ -504,7 +504,7 @@ function QuickStart() {
           ))}
         </div>
         <div className="quickstart-guide">
-          <Link to="/docs" className="button button-outline">打开上手指南 <ArrowUpRight size={16} /></Link>
+          <Link to="/docs" className="button button-outline">打开上手指南 <ArrowRight size={16} /></Link>
         </div>
       </div>
     </section>
@@ -512,11 +512,25 @@ function QuickStart() {
 }
 
 function Faq() {
-  const questions = [
+  const questions: [string, ReactNode][] = [
     ["支持哪些系统？", "Windows 10 / 11，提供 x64 与 x86 版本。"],
     ["需要安装 Java 吗？", "需要。在设置中扫描或添加 Java，选择适合游戏版本的环境。"],
     ["支持哪些登录方式？", "Microsoft、离线与第三方登录。第三方账号不能代替正版认证。"],
     ["已有游戏可以导入吗？", "可以。添加已有目录，或拖入整合包；支持 Modrinth、CurseForge 等格式。"],
+    [
+      "可以同时运行多个游戏吗？",
+      <>
+        可以。游戏运行后点击启动区的「继续启动」，再选择角色与版本启动另一实例。展开进程列表可查看或结束各个游戏；退出启动器后游戏继续运行，重新打开可恢复管理。操作详见
+        <Link to="/docs/java" className="faq-doc-link">启动设置</Link>。
+      </>,
+    ],
+    [
+      "如何和好友一起联机？",
+      <>
+        先统一游戏版本与模组。房主将世界「对局域网开放」，在「联机」页面创建房间并分享邀请码；官方使用 8 位短码，自定义使用完整长码。离线好友加入前，按游戏加载器设置房主的离线联机。步骤详见
+        <Link to="/docs/multiplayer" className="faq-doc-link">联机教程</Link>。
+      </>,
+    ],
   ];
   return (
     <section className="section faq-section" id="faq">
@@ -533,7 +547,7 @@ function Faq() {
             rel="noreferrer"
             className="text-link"
           >
-            还有问题？告诉我们 <ArrowUpRight size={15} />
+            还有问题？告诉我们 <ExternalLink size={15} aria-hidden="true" />
           </a>
         </div>
         <div className="faq-list">

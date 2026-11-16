@@ -129,7 +129,7 @@ html.home-deck-open, .home-deck-open body { overflow: hidden; overscroll-behavio
 .home-deck .resource-project-art .art-index { top: 15px; left: 16px; bottom: auto; right: auto; font: 9px var(--mono); letter-spacing: 1px; color: #5b6551; }
 .home-deck .resource-project-art .resource-tag { top: auto; bottom: 14px; left: 16px; padding: 5px 8px; background: #ffffff30; color: #526044; font-size: 9px; --pxs: 2px; }
 .resource-art-arrow { position: absolute; top: 15px; right: 16px; color: #5b6551; transition: translate 300ms var(--motion-ease); }
-.resource-card:is(:hover, :focus-visible) .resource-art-arrow { translate: 3px -3px; }
+.resource-card:is(:hover, :focus-visible) .resource-art-arrow { translate: 3px 0; }
 .home-deck .resource-card-copy { flex: 1; padding: 16px 20px; }
 .home-deck .resource-card-copy h4 { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 18px; white-space: normal; overflow-wrap: anywhere; }
 .resource-card-copy h4 svg { color: #a8bd9b; opacity: 0; transition: opacity 200ms; }
@@ -149,6 +149,7 @@ html.home-deck-open, .home-deck-open body { overflow: hidden; overscroll-behavio
 .home-deck .faq-list summary { min-height: 60px; }
 .home-deck .faq-list summary h3 { font-size: 16px; }
 .home-deck .faq-list details > p { padding: 4px 0 16px 28px; font-size: 16px; line-height: 1.6; }
+.deck-faq .deck-scroll { overflow-y: auto; overscroll-behavior-y: contain; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
 
 .home-deck .cta-section { position: relative; isolation: isolate; border: 0; background: transparent; }
 .home-deck .cta-backdrop { position: absolute; inset: 0; z-index: 0; background: #dfe9cf; pointer-events: none; }

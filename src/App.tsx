@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import {
   ArrowDownToLine,
-  ArrowUpRight,
+  ExternalLink,
   Github,
   Menu,
   Moon,
@@ -129,7 +129,7 @@ function Header({
         <Link to="/docs">使用文档</Link>
         <Link to="/changelog">更新日志</Link>
         <a href={REPO} target="_blank" rel="noreferrer">
-          GitHub <ArrowUpRight size={16} />
+          GitHub <ExternalLink size={16} aria-hidden="true" />
         </a>
         <Link to="/download">下载</Link>
       </nav>
@@ -142,8 +142,8 @@ function Footer({ compact = false }: { compact?: boolean } = {}) {
     <footer className="site-footer compact-footer container">
       <div className="footer-links">
         <Link to="/docs">使用文档</Link>
-        <a href={`${REPO}/issues`} target="_blank" rel="noreferrer">问题反馈 <ArrowUpRight size={13} /></a>
-        <a href={REPO} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={13} /></a>
+        <a href={`${REPO}/issues`} target="_blank" rel="noreferrer">问题反馈 <ExternalLink size={13} aria-hidden="true" /></a>
+        <a href={REPO} target="_blank" rel="noreferrer">GitHub <ExternalLink size={13} aria-hidden="true" /></a>
       </div>
       <div className="compact-footer-credit">
         <span>© {new Date().getFullYear()} SFMCL-T · MIT 开源</span>
@@ -164,10 +164,10 @@ function Footer({ compact = false }: { compact?: boolean } = {}) {
         <div className="footer-links">
           <Link to="/docs">使用文档</Link>
           <a href={`${REPO}/issues`} target="_blank" rel="noreferrer">
-            问题反馈 <ArrowUpRight size={13} />
+            问题反馈 <ExternalLink size={13} aria-hidden="true" />
           </a>
           <a href={REPO} target="_blank" rel="noreferrer">
-            GitHub <ArrowUpRight size={13} />
+            GitHub <ExternalLink size={13} aria-hidden="true" />
           </a>
         </div>
       </div>

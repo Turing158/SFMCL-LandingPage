@@ -1,6 +1,8 @@
+import { version as launcherVersion } from "../embed/sfmcl-ui/source-manifest.json";
+
 export const REPO = "https://github.com/Turing158/SFMCL-Transformed";
 export const RELEASES = `${REPO}/releases`;
-export const VERSION = "0.1.1";
+export const VERSION = launcherVersion;
 
 export const loaders = [
   {

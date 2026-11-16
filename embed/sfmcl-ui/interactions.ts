@@ -19,6 +19,9 @@ const visualControls = [
   '.job-toggle',
   '.launch-switch',
   '.launch-version-option',
+  '.launch-process-toggle',
+  '.launch-process-restore',
+  '.multiplayer-offline-lan button[aria-haspopup="dialog"]',
   '.sidebar-favorite',
   '.home-summary-action',
   '.home-announcement-toggle',
@@ -26,7 +29,7 @@ const visualControls = [
   '.notification-deck button',
 ].join(', ');
 const visualLabels = /^(?:选择角色 |选择 |切换模型|切换预览朝向|游戏设置 |查看 .+ 本地资源|显示 |仅显示收藏版本$|移除.+筛选$|移除分类筛选$|清空|上一页$|下一页$|返回|关闭$|编辑布局$|完成编辑$|重置筛选$|清除筛选$|筛选$|收起筛选$)/;
-const deepLabels = /^(?:查看 .+ (?:详情|日志)$|查看 Minecraft .+ 安装配置$|查看文件|查看日志$|更多$|管理 )/;
+const deepLabels = /^(?:查看 .+ (?:详情|日志)$|查看 Minecraft .+ 安装配置$|查看文件|查看日志$|更多$|前往模组页面$|管理 )/;
 
 type Interaction = 'visual' | 'success' | 'deep';
 function labelOf(control: Element) {

@@ -1762,6 +1762,11 @@ button.text-link {
   color: var(--muted);
   padding: 0 35px 24px;
 }
+.faq-doc-link {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .cta-section {
   background: #dfe9cf;
   border-block: 1px solid #d0ddc1;
@@ -2184,7 +2189,8 @@ button.text-link {
   max-height: calc(100svh - 172px);
   padding: 6px;
   --pxs: 3px;
-  box-shadow: 0 12px 28px color-mix(in srgb, var(--ink) 10%, transparent);
+  /* Follow the clipped frame instead of leaving square shadows at its corners. */
+  filter: drop-shadow(0 12px 14px color-mix(in srgb, var(--ink) 10%, transparent));
 }
 /* Keep the pixel frame outside the scrollport and clip its background corners. */
 .docs-sidebar::before {
@@ -2207,6 +2213,8 @@ button.text-link {
 }
 .docs-sidebar .eyebrow {
   display: flex;
+  /* Keep the sidebar height on whole pixels so its bottom frame stays crisp. */
+  line-height: 18px;
   margin: 0 0 14px;
   padding-left: 10px;
 }
@@ -2264,34 +2272,25 @@ button.text-link {
 .docs-document[data-phase="enter"] {
   will-change: transform, opacity;
 }
-.docs-article > h1 {
-  font-size: 37px;
-  line-height: 1.5;
-  margin-top: 15px;
-}
-.docs-lead {
-  font-size: 14px;
-  color: var(--muted);
-  margin-top: 20px;
-}
 .docs-article section {
-  padding-top: 42px;
   scroll-margin-top: 20px;
 }
 .docs-article section + section {
   margin-top: 30px;
   border-top: 1px solid var(--line);
 }
-.docs-article h2 {
+.docs-document > h1 {
   font-size: 25px;
+  line-height: 1.5;
+  margin-top: 0;
   margin-bottom: 20px;
 }
-.docs-document h3 {
+.docs-document h2 {
   margin: 36px 0 16px;
   font-size: 21px;
   line-height: 1.5;
 }
-.docs-document h4 {
+.docs-document h3 {
   margin: 26px 0 12px;
   font-size: 17px;
   line-height: 1.6;
@@ -2955,14 +2954,11 @@ button.text-link {
     gap: 8px;
     font-size: 11px;
   }
-  .docs-article > h1 {
-    font-size: 30px;
-  }
   .docs-article section > p,
   .docs-article li {
     font-size: 13px;
   }
-  .docs-article h2 {
+  .docs-document > h1 {
     font-size: 23px;
   }
   .release-entry {
@@ -3741,19 +3737,10 @@ button.text-link {
   .docs-article {
     padding-top: 5px;
   }
-  .docs-article > h1 {
-    font-size: 29px;
-  }
-  .docs-lead {
-    font-size: 13px;
-  }
-  .docs-article section {
-    padding-top: 32px;
-  }
   .docs-article section + section {
     margin-top: 25px;
   }
-  .docs-article h2 {
+  .docs-document > h1 {
     font-size: 23px;
     margin-bottom: 15px;
   }
@@ -3839,10 +3826,6 @@ button.text-link {
   width: 100%;
   aspect-ratio: 7 / 4;
 }
-.launcher-preview-window {
-  position: relative;
-  width: 100%;
-}
 .launcher-viewport {
   position: relative;
   width: 100%;
@@ -3890,34 +3873,17 @@ button.text-link {
   position: absolute;
   inset: 0;
   border: 0;
-  background: #0a2219b8;
-  backdrop-filter: blur(6px);
+  background: #0a221980;
   cursor: default;
 }
-.is-expanded .launcher-preview-window {
-  width: min(1144px, 100%, calc((100dvh - 152px) * 1.75));
-  padding: 10px;
-  background: var(--surface);
-  border: 1px solid transparent;
-  border-image: var(--px-frame) 6 / calc(2 * var(--pxs)) stretch;
-  --pxs: 4px;
-  border-radius: 0;
-  clip-path: var(--pxc);
-  box-shadow: 0 20px 60px #071e1a44;
-}
-.launcher-preview-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 0 8px 8px;
-  font-size: 13px;
-}
 .is-expanded .launcher-preview {
+  width: min(1280px, 100%, calc((100dvh - 48px) * 1.75));
   padding: 0;
+  border: 0;
   border-radius: 0;
   clip-path: none;
   border-image: none;
+  background: transparent;
   box-shadow: none;
 }
 .launcher-preview-disclaimer {
@@ -3933,14 +3899,8 @@ button.text-link {
   .launcher-preview-panel.is-expanded {
     padding: 12px;
   }
-  .launcher-preview-header {
-    font-size: 11px;
-    padding: 0 3px 5px;
-    gap: 7px;
-  }
-  .is-expanded .launcher-preview-window {
-    padding: 6px;
-    border-radius: 0;
+  .is-expanded .launcher-preview {
+    width: min(1280px, 100%, calc((100dvh - 24px) * 1.75));
   }
   .launcher-preview-disclaimer {
     font-size: 11px;
@@ -3987,7 +3947,6 @@ main:focus {
   .page-heading p,
   .download-option > p,
   .download-notes > p,
-  .docs-lead,
   .docs-article section > p,
   .docs-article li,
   .doc-callout > p,
@@ -4047,7 +4006,6 @@ main:focus {
 .section-heading h2:first-child,
 .page-heading > h1:first-child,
 .faq-grid > div > h2:first-child,
-.cta-inner > div > h2:first-child,
-.docs-article > h1:first-child {
+.cta-inner > div > h2:first-child {
   margin-top: 0;
 }

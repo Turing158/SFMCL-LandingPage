@@ -103,7 +103,7 @@ const data: Bootstrap = {
     homeCleanMode: false,
     homeNoticeLayout: "masonry",
     ...playerPreviewDefaults,
-    downloadTaskDisplay: "active",
+    downloadTaskDisplay: "always",
     minecraftDownloadSource: "auto",
     downloadConcurrency: 8,
     downloadCacheDir: "",
@@ -118,11 +118,26 @@ const versions: Version[] = ["1.21.4", "1.20.1-Fabric"].map((id) => ({
   loader: id.includes("Fabric") ? "Fabric" : "Vanilla",
   path: `${directory}/.minecraft/versions/${id}`,
   directory,
-  javaMajor: 21,
+  javaMajor: id.includes("Fabric") ? 17 : 21,
   icon: "",
 }));
 const tasks: Tasks = {
-  jobs: [{
+  jobs: [...versions.map((version, index) => ({
+    id: `showcase-game-${index}`,
+    createdAt: Math.floor(Date.now() / 1000) - (index + 1) * 300,
+    title: `启动 ${version.id}`,
+    status: "running" as const,
+    steps: ["检查环境", "准备游戏文件", "启动 Java", "游戏运行"].map((name, step) => ({
+      name, status: step === 3 ? "running" as const : "completed" as const,
+      detail: step === 3 ? "游戏已启动" : "成功",
+    })),
+    currentStep: 3,
+    log: [`Minecraft ${version.version} 已启动`],
+    launch: {
+      versionId: version.id, gameVersion: version.version, directory,
+      playerName: index === 0 ? "Alex" : "Steve", offlineLan: false, running: true,
+    },
+  })), {
     id: "showcase-install", title: "安装 Minecraft 1.21.4", status: "completed",
     steps: ["检查环境", "下载游戏", "安装完成"].map((name) => ({
       name, status: "completed", detail: "成功",
@@ -237,6 +252,13 @@ async function request(operation: string, payload: Payload) {
       data.settings.activeVersion = payload.id;
       if (payload.directory) data.settings.activeDir = payload.directory;
       return;
+    case "versions.detail": {
+      const version = versions.find((item) => item.id === payload.id) || versions[0];
+      return {
+        id: version.id, clientVersion: version.version,
+        libraries: version.loader === "Fabric" ? [{ name: "net.fabricmc:fabric-loader:0.16.10" }] : [],
+      };
+    }
     case "versions.settings.get":
       return copy(
         versionSettings.get(payload.id) || {

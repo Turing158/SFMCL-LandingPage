@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import {
   ArrowDownToLine,
   ArrowRight,
-  ArrowUpRight,
   ExternalLink,
   FileBox,
   Github,
@@ -155,7 +154,7 @@ export function Download({ releaseState }: { releaseState: ReleaseState }) {
                 >
                   {asset ? <ArrowDownToLine size={17} /> : <Github size={17} />}
                   {asset ? `下载 ${item.name}` : "前往 GitHub 下载"}
-                  <ArrowUpRight size={15} />
+                  {!asset && <ExternalLink size={15} aria-hidden="true" />}
                 </a>
               </article>
             );
@@ -194,7 +193,7 @@ export function Download({ releaseState }: { releaseState: ReleaseState }) {
             </span>
           </div>
           <a href={REPO} target="_blank" rel="noreferrer" className="text-link">
-            查看源码与开发说明 <ArrowUpRight size={16} />
+            查看源码与开发说明 <ExternalLink size={16} aria-hidden="true" />
           </a>
         </div>
       </div>
@@ -262,7 +261,7 @@ export function Changelog({ releaseState }: { releaseState: ReleaseState }) {
                   rel="noreferrer"
                   className="text-link"
                 >
-                  查看发布详情 <ArrowUpRight size={15} />
+                  查看发布详情 <ExternalLink size={15} aria-hidden="true" />
                 </a>
               </div>
             </article>
@@ -275,7 +274,7 @@ export function Changelog({ releaseState }: { releaseState: ReleaseState }) {
           className="button button-outline"
         >
           <Github size={17} />
-          查看全部 GitHub Releases <ArrowUpRight size={15} />
+          查看全部 GitHub Releases <ExternalLink size={15} aria-hidden="true" />
         </a>
       </div>
     </main>

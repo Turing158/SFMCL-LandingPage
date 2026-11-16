@@ -13,7 +13,7 @@
   transform-origin: left;
 }
 
-/* Reveal content without transforming ancestors of the fixed launcher dialog. */
+/* Reveal content without transforming ancestors of the fixed enlarged preview. */
 [data-reveal="pending"] {
   opacity: 0;
 }
@@ -670,13 +670,13 @@
   animation-duration: 2.5s;
 }
 
-.is-expanded .launcher-preview-window {
-  animation: dialog-enter 320ms var(--motion-ease) both;
+.is-expanded .launcher-preview {
+  animation: preview-expand-enter 320ms var(--motion-ease) both;
 }
 .is-expanded .launcher-preview-backdrop {
   animation: backdrop-enter 250ms ease both;
 }
-@keyframes dialog-enter {
+@keyframes preview-expand-enter {
   from {
     opacity: 0;
     transform: translateY(18px) scale(0.97);
@@ -694,13 +694,13 @@
     opacity: 1;
   }
 }
-.is-expanded.is-closing .launcher-preview-window {
-  animation: dialog-exit 180ms ease-in both;
+.is-expanded.is-closing .launcher-preview {
+  animation: preview-expand-exit 180ms ease-in both;
 }
 .is-expanded.is-closing .launcher-preview-backdrop {
   animation: backdrop-enter 180ms ease-in reverse both;
 }
-@keyframes dialog-exit {
+@keyframes preview-expand-exit {
   from {
     opacity: 1;
     transform: none;

@@ -133,11 +133,6 @@ export default function DocsPage() {
           </aside>
         </div>
         <article className="docs-article" aria-busy={phase !== "idle"}>
-          <h1>从这里，走进你的世界。</h1>
-          <p className="docs-lead">
-            SFMCL-T 使用指南。选好角色与版本，准备好
-            Java，剩下的就交给下一次冒险。
-          </p>
           <div className="docs-document-stage" aria-live="polite" aria-atomic="true">
             <section
               ref={pane}
@@ -150,9 +145,7 @@ export default function DocsPage() {
               <Markdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  h1: ({ children }) => <h2 id="docs-current-title">{children}</h2>,
-                  h2: ({ children }) => <h3>{children}</h3>,
-                  h3: ({ children }) => <h4>{children}</h4>,
+                  h1: ({ children }) => <h1 id="docs-current-title">{children}</h1>,
                   ol: ({ children }) => <ol className="doc-steps">{children}</ol>,
                   table: ({ children }) => (
                     <div className="doc-table-wrap"><table>{children}</table></div>
