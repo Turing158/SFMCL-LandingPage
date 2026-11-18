@@ -3,17 +3,11 @@ import { useState } from "react";
 import { Check, FolderOpen, RefreshCw, Settings2 } from "lucide-react";
 import { PageHeader } from "../PageHeader";
 import { useApp } from "../store";
+import { invalidateImages } from "../images";
 import { api, pick } from "../api";
 import { Button, TabList, TabPanel, PixelFrame } from "../components";
 import { GameSettingsFields } from "./GameSettingsFields";
 import type { HomeNoticeLayout, Settings } from "../types";
-import {
-  appIcon,
-  BRAND_WORDMARK,
-  BRAND_FULL_NAME,
-  BRAND_EDITION,
-  BRAND_TAGLINE,
-} from "../branding";
 import { useTabContentTransition } from "../useTabContentTransition";
 import { useButtonPressFeedback } from "../useButtonPressFeedback";
 import {
@@ -22,7 +16,8 @@ import {
   withJavaPaths,
 } from "../gameSettings";
 import { useAutoSavedSettings } from "../useAutoSavedSettings";
-import { UpdateCheckButton, useUpdateCheck } from "../UpdateCheckButton";
+import { useUpdateCheck } from "../UpdateCheckButton";
+import { About } from "./About";
 import { LocalDataSettings } from "../LocalDataSettings";
 import { previewModeLabel } from "../playerPreview";
 import type {
@@ -186,7 +181,10 @@ export function SettingsPage() {
                               "jpg",
                               "jpeg",
                             ]);
-                            if (path) change("background", path);
+                            if (path) {
+                              invalidateImages([path]);
+                              change("background", path);
+                            }
                           })
                         }
                       >
@@ -204,7 +202,12 @@ export function SettingsPage() {
               )}
               <div className="row-actions">
                 <Button
-                  onClick={() => void app.run(app.refresh, "背景与图片已刷新")}
+                  onClick={() =>
+                    void app.run(
+                      () => app.refresh("backgrounds"),
+                      "背景图片已刷新",
+                    )
+                  }
                 >
                   <RefreshCw size={16} />
                   刷新背景图片
@@ -328,7 +331,10 @@ export function SettingsPage() {
                               "jpg",
                               "jpeg",
                             ]);
-                            if (path) change("player3dBackground", path);
+                            if (path) {
+                              invalidateImages([path]);
+                              change("player3dBackground", path);
+                            }
                           })
                         }
                       >
@@ -451,32 +457,7 @@ export function SettingsPage() {
             <LocalDataSettings />
           </div>
         )}
-        {tab === "about" && (
-          <div className="settings-stack">
-            <section className="panel about-card has-surface">
-              <PixelFrame />
-              <img
-                className="about-mark"
-                src={appIcon}
-                alt={`${BRAND_WORDMARK} 软件图标`}
-                draggable={false}
-              />
-              <div className="about-remade-kicker">
-                <span className="about-remade-mark" aria-label="T 重制标记">
-                  T
-                </span>
-                <span className="about-remade-edition">{BRAND_EDITION}</span>
-                <span className="about-remade-tagline">{BRAND_TAGLINE}</span>
-              </div>
-              <h2>{BRAND_WORDMARK}</h2>
-              <p className="about-full-name">{BRAND_FULL_NAME}</p>
-              <span className="badge has-surface">
-                <PixelFrame />v{app.data.version} · Rust + Tauri
-              </span>
-              <UpdateCheckButton {...updateCheck} />
-            </section>
-          </div>
-        )}
+        {tab === "about" && <About updateCheck={updateCheck} />}
       </TabPanel>
     </div>
   );

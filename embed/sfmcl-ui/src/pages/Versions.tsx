@@ -22,6 +22,7 @@ import {
   gameDirectoryName,
   gameDirectoryPath,
   minecraftDirectoryPath,
+  registerGameDirectory,
 } from "../gameDirectories";
 import { useApp } from "../store";
 import { api, confirmAction, pick } from "../api";
@@ -86,20 +87,7 @@ export function Versions() {
   async function addDir() {
     const selected = await pick(true);
     if (selected) {
-      const directory = gameDirectoryPath(selected);
-      const existing = s.gameDirs.find(
-        (entry) => gameDirectoryPath(entry.path) === directory,
-      );
-      const path = existing?.path || directory;
-      const gameDirs = existing
-        ? s.gameDirs
-        : [
-            ...s.gameDirs,
-            {
-              name: path.split(/[\\/]/).filter(Boolean).pop() || "游戏目录",
-              path,
-            },
-          ];
+      const { gameDirs, path } = registerGameDirectory(s.gameDirs, selected);
       await app.save({ ...s, gameDirs, activeDir: path, activeVersion: "" });
       setShowAll(false);
     }
@@ -222,60 +210,66 @@ export function Versions() {
             </option>
           ))}
         </Select>
-        <button
-          className="icon-button has-surface"
-          aria-label="添加游戏目录"
-          onClick={() => void app.run(addDir)}
-        >
-          <PixelFrame />
-          <Plus size={18} />
-        </button>
-        <button
-          className="icon-button has-surface"
-          aria-label="打开游戏目录"
-          disabled={showAll || !s.activeDir}
-          onClick={() =>
-            void app.run(() =>
-              api("path.open", { path: minecraftDirectoryPath(s.activeDir) }),
-            )
-          }
-        >
-          <PixelFrame />
-          <FolderOpen size={18} />
-        </button>
-        <button
-          className="icon-button has-surface"
-          aria-label="移除目录记录"
-          disabled={showAll || !s.activeDir}
-          onClick={async () => {
-            if (
-              await confirmAction(
-                "从列表中移除此目录？磁盘上的游戏文件会保留。",
+        <div className="versions-directory-actions">
+          <button
+            className="icon-button has-surface"
+            aria-label="添加游戏目录"
+            onClick={() => void app.run(addDir)}
+          >
+            <PixelFrame />
+            <Plus size={18} />
+          </button>
+          <button
+            className="icon-button has-surface"
+            aria-label="打开游戏目录"
+            disabled={showAll || !s.activeDir}
+            onClick={() =>
+              void app.run(() =>
+                api("path.open", { path: minecraftDirectoryPath(s.activeDir) }),
               )
-            )
-              await app.run(async () => {
-                const dirs = s.gameDirs.filter((d) => d.path !== s.activeDir);
-                await app.save({
-                  ...s,
-                  gameDirs: dirs,
-                  activeDir: dirs[0]?.path || "",
-                  activeVersion: "",
-                });
-              }, "目录已从列表移除");
-          }}
-        >
-          <PixelFrame />
-          <Trash2 size={17} />
-        </button>
-        <button
-          className="icon-button has-surface"
-          aria-label="刷新版本"
-          disabled={app.busy || (showAll && all.loading)}
-          onClick={() => (showAll ? all.refresh() : void app.run(app.refresh))}
-        >
-          <PixelFrame />
-          <RefreshCw size={17} />
-        </button>
+            }
+          >
+            <PixelFrame />
+            <FolderOpen size={18} />
+          </button>
+          <button
+            className="icon-button has-surface"
+            aria-label="移除目录记录"
+            disabled={showAll || !s.activeDir}
+            onClick={async () => {
+              if (
+                await confirmAction(
+                  "从列表中移除此目录？磁盘上的游戏文件会保留。",
+                )
+              )
+                await app.run(async () => {
+                  const dirs = s.gameDirs.filter((d) => d.path !== s.activeDir);
+                  await app.save({
+                    ...s,
+                    gameDirs: dirs,
+                    activeDir: dirs[0]?.path || "",
+                    activeVersion: "",
+                  });
+                }, "目录已从列表移除");
+            }}
+          >
+            <PixelFrame />
+            <Trash2 size={17} />
+          </button>
+          <button
+            className="icon-button has-surface"
+            aria-label="刷新版本"
+            disabled={app.busy || (showAll && all.loading)}
+            onClick={() =>
+              showAll
+                ? all.refresh()
+                : void app.run(() => app.refresh("versions"))
+            }
+          >
+            <PixelFrame />
+            <RefreshCw size={17} />
+          </button>
+        </div>
       </div>
       <section className="versions-local" aria-label="本地游戏">
         <div className="section-heading versions-heading">

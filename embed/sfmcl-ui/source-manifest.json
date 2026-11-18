@@ -3,6 +3,10 @@
   "version": "1.0.1",
   "files": [
     {
+      "path": "about.css",
+      "sha256": "6c5c82873261a6b0a5038de6b2c2d525d1ef33babc525dafc70f31b4cd21e0e9"
+    },
+    {
       "path": "AnimatedNoticeList.tsx",
       "sha256": "d54235454bff24379090e270f12da3a1c44b9ef287bea2aadc5d4aea9f9bae37"
     },
@@ -16,7 +20,7 @@
     },
     {
       "path": "App.tsx",
-      "sha256": "2dfeb2ca3a5631aee8e669c1ed790dbe3fee92a9f54fc9f1130991a531d13a8d"
+      "sha256": "6305406762fc3cb01faac57d98f9c50768c29a8f8fc592831f1423c1be3cd70b"
     },
     {
       "path": "autoSave.ts",
@@ -32,7 +36,7 @@
     },
     {
       "path": "components.tsx",
-      "sha256": "2061c82b8e3e2fb4de1d99b4c509b522fafd5905ef10ee972736518b7456c700"
+      "sha256": "d4d3c033145b75aafc37834a5f77611f12f8a64aaa7862e4f1a4313211562b16"
     },
     {
       "path": "confirmation.ts",
@@ -52,7 +56,7 @@
     },
     {
       "path": "controls.css",
-      "sha256": "0e20ad00822540ceae7b1785f19939e55bd5326919de4594f283d0b84ef368ec"
+      "sha256": "53e98fb6568bc193aa93183bd02ff65bf865a638f5b1707f0fb5a321b7028bfc"
     },
     {
       "path": "controls.tsx",
@@ -76,7 +80,7 @@
     },
     {
       "path": "downloads.css",
-      "sha256": "eff5f39f7673d26c271145bb94829e15bd37d599f251ad2ed0937ad655e59652"
+      "sha256": "e3a5bcc9ae3b676dc26ac8e8988f5c860720a3a906b2080a18f8c03385d1b91b"
     },
     {
       "path": "DropOverlay.tsx",
@@ -104,7 +108,7 @@
     },
     {
       "path": "gameDirectories.ts",
-      "sha256": "e1596467b5ca9302f9fc9e3ea85b80b086617274fe7a4c2ad469ee179bd82dec"
+      "sha256": "e440af6309ab7c67d31a34f6560778d13b78a7dda623af476a7500fa37493525"
     },
     {
       "path": "gameSettings.ts",
@@ -131,8 +135,12 @@
       "sha256": "51a0d97a7aeda9cd8b68bcfc983a5e2aadefa2debeaab96c0701c56004461c4c"
     },
     {
+      "path": "imageInvalidation.ts",
+      "sha256": "5de841c49868ad4db628c2a23e0dd1ccbbd02a0c3eed03835fdba551e4362258"
+    },
+    {
       "path": "images.ts",
-      "sha256": "7af76dbd4bdd27528d7684f6e2f53ca7c35cb3676231862b5155970faca501a5"
+      "sha256": "62663d16ee4bc1224c30f4bf24dc1b42539e457cc235bdd91ca804d040e7a645"
     },
     {
       "path": "installOptions.ts",
@@ -148,7 +156,7 @@
     },
     {
       "path": "LaunchDock.tsx",
-      "sha256": "be8c32d86e2dea69f12e02ece59fa390a642ed565f9a1d072f273b418b3c8e61"
+      "sha256": "21db84bfd5bb785b60ee83fa6382bfe6e9466c7cd51e11574f148854599f66d5"
     },
     {
       "path": "launchState.ts",
@@ -156,7 +164,7 @@
     },
     {
       "path": "LocalDataSettings.tsx",
-      "sha256": "d81d5347f8dd0d8fc7ea91b8373d5f0edeec37ee5459b04c68a217d2b6a314e4"
+      "sha256": "27cc65a7d7e419901e3e5b681308a774925551bda33a914155ced328cd834311"
     },
     {
       "path": "localResources.ts",
@@ -172,7 +180,7 @@
     },
     {
       "path": "modpacks.ts",
-      "sha256": "163f6bac19a27707929ffa5aa68de2148303cd150b3fc67fe240c3ba42dbf93d"
+      "sha256": "fbf47185a7f0e5189d74a8d26cc4d8eb8e35d12268af95a989c6676419614056"
     },
     {
       "path": "multiplayer.css",
@@ -180,7 +188,7 @@
     },
     {
       "path": "navigation.ts",
-      "sha256": "1b84abf8fe0b811a58120c4f73dbae1c8a8d77f2182c78942f1c126ed63afca1"
+      "sha256": "f8ad666a9e1b1c200a26afab4af313a28641ada017c75a13415752e34350627d"
     },
     {
       "path": "notices.css",
@@ -215,16 +223,20 @@
       "sha256": "fa64e685c78208cb4b40d921110a6c7be6792605576f8022d78a7cc7f971fe13"
     },
     {
+      "path": "pages/About.tsx",
+      "sha256": "446e6856f11aca501b5488d5dad235fc3973c270fecacda024488b294cc113d5"
+    },
+    {
       "path": "pages/CatalogMotion.tsx",
-      "sha256": "dc6790aadb9567fc6b42d3baf8bd49f7c05c7071e60ec484eba600001bfa3b06"
+      "sha256": "5715ccb9dd173487fadde60194a006d7c98f4ae876126479ab2b81e163756a14"
     },
     {
       "path": "pages/CatalogView.tsx",
-      "sha256": "87f8b57ca4644fb4233fc0f468cb6ec9f280093c6e89a533eb2aea45a0c69164"
+      "sha256": "d03491df3a8a85db04c24ca9fe8ea01ca29684668476c5f0836b7a3cc17610e6"
     },
     {
       "path": "pages/Downloads.tsx",
-      "sha256": "399665f35b0ff1436047989205595e33d53aaa6fea412f587fba453a6cc188b2"
+      "sha256": "7628bc878e74278c0ce355d55bdfbb968dc8272e8dbcb690cda48b636bab6a35"
     },
     {
       "path": "pages/GameSettingsFields.tsx",
@@ -236,15 +248,15 @@
     },
     {
       "path": "pages/LocalModChannels.tsx",
-      "sha256": "9a6f78232f8fa3ac2d8d7413be8e8abd3f5107ea6ea63f3aac2184b0242dfdd5"
+      "sha256": "e78331a86d89d9099684799c32a3493ba4625fe07e135d75715424baae82b747"
     },
     {
       "path": "pages/LocalResourcePage.tsx",
-      "sha256": "81d6a89eaa83514f40fc82c3059887275f339c148be960150f48fc15bbd10f09"
+      "sha256": "f074726136137c0a98970ea2e41fcd2244fefd18de0399f287c2a6086ab361d5"
     },
     {
       "path": "pages/LocalResources.tsx",
-      "sha256": "5f44fb2e1d20befd5316befdd47c18315345e4c73541d9fe4af2f065957fc3c8"
+      "sha256": "d0e271559d045442c2a9627622e62784f202085ae443b19fe8b6f4b6c8a2cdef"
     },
     {
       "path": "pages/MinecraftInstall.tsx",
@@ -260,11 +272,11 @@
     },
     {
       "path": "pages/ModpackInstallDialog.tsx",
-      "sha256": "ec8af54f6ac0d7ab7b7b03495ba76d21ba1ed591cb62b20833bf6d60a76b7c96"
+      "sha256": "9083d099616fd67d45cdb35dadbb9e7ca026c54a6d357d1bfac13479ece8a78f"
     },
     {
       "path": "pages/Multiplayer.tsx",
-      "sha256": "df5f940a3ca5275a37b4f5e285f82f4016e0dbb10404f42ba06a523af3fd4527"
+      "sha256": "4378a400f446ef32587851b0e001223868e6419d8b0ec530ff7c9e42bdc21e56"
     },
     {
       "path": "pages/MultiplayerInviteInput.tsx",
@@ -296,7 +308,7 @@
     },
     {
       "path": "pages/Players.tsx",
-      "sha256": "f87aec31b04454ff1a4da1e0593b9d595df71ef05745a7fb56d1d85db21d0b6c"
+      "sha256": "31007b2bc0ddbea7a1584aafd26e9940c335c8d72f2d697e886e82429f0656f8"
     },
     {
       "path": "pages/PlayerSkinDialog.tsx",
@@ -316,15 +328,15 @@
     },
     {
       "path": "pages/ProjectPage.tsx",
-      "sha256": "e196e2fc3227c158530151a3e28da46ece1c099b6bfe6c19d48deb8de5003b18"
+      "sha256": "a9e42d116f11e68bfb5bfeb6495200d0e791b61471854bff05c759991714fd03"
     },
     {
       "path": "pages/ResourceDownloadDialog.tsx",
-      "sha256": "23a7736790699006e1ae7d1a7af97359da0c411a05daa917fc1ca92bdf84d618"
+      "sha256": "ba6aeb74c0243f0381f9b1fa62f593d1cbd2cc7757e1107c783665ebf71ed2e4"
     },
     {
       "path": "pages/Resources.tsx",
-      "sha256": "2dc334b4769b8ee0f71d25977b00abc837959fa467a5a06a3d2daa833054386e"
+      "sha256": "fdd3b9ca261a36f82f9fb316ff9b1022620a65fb3021806a8adc8cb84518116b"
     },
     {
       "path": "pages/ResourceSubpage.tsx",
@@ -332,7 +344,7 @@
     },
     {
       "path": "pages/Settings.tsx",
-      "sha256": "f1adb99b0d1aa5af4b4fcf6f58b4a949957e220ab0dd196f2ffda8cae3ab6d6c"
+      "sha256": "336ae54da5e167c85a62177f87e595c3375175df03814bce10a74ff70072aad3"
     },
     {
       "path": "pages/useInstallCatalog.ts",
@@ -340,7 +352,7 @@
     },
     {
       "path": "pages/Versions.tsx",
-      "sha256": "52a2fa4f1cf32b7244a1210a2291c794ff5aa68bf4801027a99e887031d3bb7b"
+      "sha256": "1995ae5921011f621d151bf602f28d368dbeadf90079c9bf50ec7973d6330abc"
     },
     {
       "path": "pages/VersionSettings.tsx",
@@ -384,7 +396,7 @@
     },
     {
       "path": "players.css",
-      "sha256": "8f703e263bc8507fdea81ae07a7aac0cb2a2e1768b911bcb118c9871aca7fd0e"
+      "sha256": "510ce87c59fa102f8c3ffd9cf9e607791e245110fed09f2eb98f9f0473126cc2"
     },
     {
       "path": "PlayerSkinPreview.tsx",
@@ -395,8 +407,12 @@
       "sha256": "229d985b244e1c1719cac8254c2e09449943b4edcb497e31f24eed7dd9523d27"
     },
     {
+      "path": "resourceNames.ts",
+      "sha256": "ddce3b8f6fe66747d78c8fdeee2ebd90d233bbd7b90b6eb614258fc9ddf66b54"
+    },
+    {
       "path": "resources.css",
-      "sha256": "7fbbeded14661b16138a6f67dbc9700b9b50a6a50c07ade9bf5179d790e739ae"
+      "sha256": "9ca8d0dd55625d0e68e54eb07954b17388482d7f0ebcee797d974186f6362f15"
     },
     {
       "path": "resourceSources.tsx",
@@ -416,11 +432,15 @@
     },
     {
       "path": "sidebar.css",
-      "sha256": "d31e13df3b8aed0a7480249ace8cb7f47aa361757d3e4318c995af817b7eba93"
+      "sha256": "9b7754c1698aeb68760ffc81bf5c8802de5843390e2f791bb7950918b81cac91"
+    },
+    {
+      "path": "SidebarDownloads.tsx",
+      "sha256": "e8ae3e768c0e37783bde6af5445e72ef6bbca461b21aeb1be9fc08247fe1d89b"
     },
     {
       "path": "SidebarProgress.tsx",
-      "sha256": "75c87bccfa86951081055ffb0b960af6fc30b0a7e5fce65988c6ca7b7a5dc9d8"
+      "sha256": "b460ad0ffecab7d6a10f46884702cc69e9fc91a53294f602e5e61946acb44bb3"
     },
     {
       "path": "SkinPreview3D.tsx",
@@ -440,7 +460,7 @@
     },
     {
       "path": "store.tsx",
-      "sha256": "2b183a4cebe303b2b6d9f1312c1a6908851d9a938d84d8e569b219f7ed91f29e"
+      "sha256": "543c5cc309a33eec5a5abaed532e27ea78530ee87c949a7e363a716e25d3295d"
     },
     {
       "path": "styles.css",
@@ -453,6 +473,14 @@
     {
       "path": "surfaces.css",
       "sha256": "f418150f34e4143931e449515dc85d61cf7e09d0a2acef28b13f8ba4bef7562a"
+    },
+    {
+      "path": "tasks.tsx",
+      "sha256": "d30b358c7d20c3e06b82d3e0c1d8c3cf1740ee37dd5f1f006dc48dd215205534"
+    },
+    {
+      "path": "taskStore.ts",
+      "sha256": "16d4305aef978b073385dec628e1a746e087492651af3f53b03eb0f704b2f956"
     },
     {
       "path": "Titlebar.tsx",
@@ -468,7 +496,7 @@
     },
     {
       "path": "types.ts",
-      "sha256": "b37b1c9f4c5f00ccf8b504a8e66170e49b483218cc8ba6ec59cbef873d1ab511"
+      "sha256": "1a31011f129108cbb3c4764b937db81d750261361c6feee9fcac30dba86895f7"
     },
     {
       "path": "UpdateCheckButton.tsx",
@@ -476,7 +504,7 @@
     },
     {
       "path": "useAllVersions.ts",
-      "sha256": "823204b2d6804231425154d537eb5d9e4fb579e1629b5f5e832b63958c39fefb"
+      "sha256": "186072c2cfef06cf9f9abd8950f0614380050f102ead8a30bbb90e343f9b0a54"
     },
     {
       "path": "useAutoSavedSettings.ts",
@@ -500,7 +528,7 @@
     },
     {
       "path": "useImageResource.ts",
-      "sha256": "f52fb42058ae886658b57dff89c67feee92861b10e39887d95b5460fdbe72084"
+      "sha256": "2a914c3691f45352c287a62f0665f4de4112187a136accfb25943a3731c19509"
     },
     {
       "path": "useLaunchDisclosure.ts",
@@ -540,7 +568,7 @@
     },
     {
       "path": "usePlayerLogin.ts",
-      "sha256": "e0caa26fe513624203698d0d1b253f67a755322e2ccf8a9644641ac34092e713"
+      "sha256": "1534419c8f9a206c0652ebb10f7c010f162a8e1722fa132f9987a1eef5dc4688"
     },
     {
       "path": "usePlayerLoginTransition.ts",
@@ -576,7 +604,7 @@
     },
     {
       "path": "VersionContextMenu.tsx",
-      "sha256": "60d090c7001ffb3efb95ffc3ec247ffa5773f4928c7868feaa597f54c2f3658f"
+      "sha256": "33986b661b03f152dc0669bd459df6c2194403bc608b231d4321dbea78ab0779"
     },
     {
       "path": "VersionDirectoryResults.tsx",
@@ -592,7 +620,7 @@
     },
     {
       "path": "versions.css",
-      "sha256": "655706a55b68dfe2d4c5a3fcac0ae314fc05361dc68ed54e15f0f9d033578253"
+      "sha256": "a82288f60b6f8d1d71850288b3496740daf59b30c829b458ec980563a7e809a4"
     },
     {
       "path": "window-motion.css",

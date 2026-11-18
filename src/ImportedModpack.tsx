@@ -91,27 +91,27 @@ export default function ImportedModpack() {
               <br />
               装下整个新世界。
             </h2>
-            <p>拖入整合包，让启动器完成准备。</p>
+            <p>拖入本地整合包，或在资源中心按中文名搜索。</p>
             <ol className="import-steps">
               <li>
                 <span>01</span>
                 <div>
-                  <strong>拖入整合包</strong>
-                  <small>本地压缩包、完整客户端目录，或在线整合包</small>
+                  <strong>选择整合包</strong>
+                  <small>选择在线项目，或拖入压缩包、完整客户端目录</small>
                 </div>
               </li>
               <li>
                 <span>02</span>
                 <div>
-                  <strong>确认配置</strong>
-                  <small>确认版本、加载器与安装位置</small>
+                  <strong>选择安装目录</strong>
+                  <small>选用已有游戏目录，也可在安装时添加目录</small>
                 </div>
               </li>
               <li>
                 <span>03</span>
                 <div>
                   <strong>安装并出发</strong>
-                  <small>下载并校验文件，合并整合包内容</small>
+                  <small>并行解析依赖，下载并校验文件</small>
                 </div>
               </li>
             </ol>

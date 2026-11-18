@@ -237,7 +237,7 @@ function Features({ theme }: { theme: Theme }) {
               </div>
             </div>
             <h3>下载进度，心中有数。</h3>
-            <p>自动选源、文件校验，支持暂停与重试。</p>
+            <p>下载中可调整同时下载数，侧栏随时查看进度。</p>
           </article>
           <article
             className="feature-card appearance-feature"
@@ -431,14 +431,14 @@ function Resources() {
               href={`https://modrinth.com/${card.slug === "iris" ? "mod" : group.projectType}/${card.slug}`}
               target="_blank"
               rel="noreferrer"
-              aria-label={`${card.title}（在新标签页打开项目页）`}
+              aria-label={`${card.localizedName ? card.localizedName.name + " · " : ""}${card.title}（在新标签页打开项目页）`}
             >
               <div className="resource-art resource-project-art" style={{ "--art-tint": card.tint } as CSSProperties}>
                 <div className="resource-art-grid" aria-hidden="true" />
                 <span className="art-index" aria-hidden="true">0{index + 1}</span>
                 <img className="resource-project-icon" src={`./assets/resource-${card.slug}.png`}
                   alt={`${card.title} 项目图标`} width={82} height={82} loading="lazy" decoding="async" />
-                <span className="resource-tag">{card.tag}</span>
+                <span className="resource-tag">{card.localizedName?.name ?? card.tag}</span>
                 <ExternalLink className="resource-art-arrow" size={19} aria-hidden="true" />
               </div>
               <div className="resource-card-copy">
@@ -449,7 +449,7 @@ function Resources() {
           ))}
         </div>
         <div className="resource-footer">
-          <Link to="/docs#resources" className="text-link">
+          <Link to="/docs/resources" className="text-link">
             探索资源中心 <ArrowRight size={16} />
           </Link>
         </div>
@@ -516,7 +516,7 @@ function Faq() {
     ["支持哪些系统？", "Windows 10 / 11，提供 x64 与 x86 版本。"],
     ["需要安装 Java 吗？", "需要。在设置中扫描或添加 Java，选择适合游戏版本的环境。"],
     ["支持哪些登录方式？", "Microsoft、离线与第三方登录。第三方账号不能代替正版认证。"],
-    ["已有游戏可以导入吗？", "可以。添加已有目录，或拖入整合包；支持 Modrinth、CurseForge 等格式。"],
+    ["已有游戏可以导入吗？", <>可以。添加已有游戏目录，或拖入整合包。安装时也能直接添加目标目录。详见<Link to="/docs/modpacks" className="faq-doc-link">导入整合包</Link>。</>],
     [
       "可以同时运行多个游戏吗？",
       <>

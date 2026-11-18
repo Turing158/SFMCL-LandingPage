@@ -9,6 +9,7 @@ import type { HomeContentConfig } from "./src/homeContentConfig";
 import { playerPreviewDefaults } from "./src/playerPreview";
 import type { MultiplayerSnapshot } from "./src/useMultiplayer";
 import { version as launcherVersion } from "./source-manifest.json";
+import { localModSamples, sampleCategories, searchSamples } from "./resourceSamples";
 
 // Only the browser/IPC boundary is adapted. The application components and CSS
 // are the original files, and all demo operations stay in this frame's memory.
@@ -343,34 +344,14 @@ async function request(operation: string, payload: Payload) {
         },
       ];
     case "resources.categories":
-      return [
-        { id: "optimization", name: "性能优化" },
-        { id: "worldgen", name: "世界生成" },
-      ];
-    case "resources.search": {
-      const items = ["性能优化", "世界拓展", "实用工具"]
-        .map((name, i) => ({
-          id: `showcase-resource-${i}`,
-          source: payload.source || "modrinth",
-          title: `示例：${name}`,
-          description: "浏览版本、分类与项目信息，找到适合自己世界的资源。",
-          author: "界面演示",
-          icon: "",
-          downloads: 0,
-          categories: [name],
-          versions: ["1.21.4", "1.20.1"],
-          website: "",
-          body: "",
-        }))
-        .filter((item) =>
-          item.title
-            .toLowerCase()
-            .includes((payload.query || "").toLowerCase()),
-        );
-      return { total: items.length, items: copy(items) };
+      return sampleCategories(payload.kind);
+    case "resources.search":
+      return searchSamples({ ...payload, kind: payload.kind });
+    case "resources.local": {
+      const version = versions.find((item) => item.id === payload.versionId);
+      return payload.kind === "mod" && version?.loader === "Fabric"
+        ? localModSamples(version.path) : [];
     }
-    case "resources.local":
-      return [];
     case "image":
       return "/assets/steve.png";
     case "updates":

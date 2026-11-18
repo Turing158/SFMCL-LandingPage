@@ -1,6 +1,7 @@
 // Keep the synced launcher source untouched. The showcase retains navigation
 // and visual controls, while action buttons only acknowledge a successful click.
 const controls = 'button, a[href], [role="button"], .pixel-select-option';
+const searchForms = '.catalog-search, .catalog-filter-fields';
 const visualControls = [
   '#sidebar-navigation button',
   '.sidebar-collapse',
@@ -15,6 +16,7 @@ const visualControls = [
   '.theme-option',
   '.players-view-switch',
   '.catalog-view',
+  '.catalog-search-submit',
   '.catalog-filter-toggle',
   '.job-toggle',
   '.launch-switch',
@@ -66,6 +68,7 @@ export function initializePreviewInteractions(notify: (message: string) => void)
     if (interaction === 'success') acknowledge(control);
   };
   const submit = (event: SubmitEvent) => {
+    if (event.target instanceof HTMLFormElement && event.target.matches(searchForms)) return;
     event.preventDefault();
     event.stopImmediatePropagation();
     notify('操作成功');
@@ -81,7 +84,7 @@ export function initializePreviewInteractions(notify: (message: string) => void)
     if (event.key !== 'Enter' || !(event.target instanceof HTMLInputElement))
       return;
     const form = event.target.closest('form');
-    if (!form) return;
+    if (!form || form.matches(searchForms)) return;
     event.preventDefault();
     event.stopImmediatePropagation();
     const button = form.querySelector('button[type="submit"]');

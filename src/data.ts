@@ -1,4 +1,5 @@
 import { version as launcherVersion } from "../embed/sfmcl-ui/source-manifest.json";
+import type { LocalizedName } from "../embed/sfmcl-ui/src/types";
 
 export const REPO = "https://github.com/Turing158/SFMCL-Transformed";
 export const RELEASES = `${REPO}/releases`;
@@ -55,17 +56,34 @@ export const loaders = [
   },
 ];
 
-export const resourceGroups = [
+interface ResourceGroup {
+  id: string;
+  name: string;
+  projectType: string;
+  heading: string;
+  description: string;
+  cards: {
+    title: string;
+    localizedName?: LocalizedName;
+    desc: string;
+    slug: string;
+    tint: string;
+    tag: string;
+  }[];
+}
+
+export const resourceGroups: ResourceGroup[] = [
   {
     id: "mods",
     name: "模组",
     projectType: "mod",
-    heading: "世界的可能，由你扩展。",
+    heading: "在启动器里，搜「钠」就能找到 Sodium。",
     description:
-      "从性能优化到全新玩法，按游戏版本与加载器筛选，找到适合你的下一块拼图。",
+      "模组和整合包支持按中文名、原名或别名搜索，还可以按游戏版本和加载器筛选。",
     cards: [
       {
         title: "Sodium",
+        localizedName: { name: "钠", aliases: [] },
         desc: "让方块世界的每一帧，都更加流畅。",
         slug: "sodium",
         tint: "#f6e8de",
@@ -73,6 +91,7 @@ export const resourceGroups = [
       },
       {
         title: "Just Enough Items",
+        localizedName: { name: "JEI物品管理器", aliases: ["JEI"] },
         desc: "从合成配方到物品用途，随手可查。",
         slug: "jei",
         tint: "#e5ead9",
@@ -80,6 +99,7 @@ export const resourceGroups = [
       },
       {
         title: "AppleSkin",
+        localizedName: { name: "苹果皮", aliases: ["AS"] },
         desc: "饥饿值与饱和度，让每一餐心中有数。",
         slug: "appleskin",
         tint: "#efe1df",
